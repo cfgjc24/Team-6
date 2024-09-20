@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
@@ -21,3 +22,6 @@ if __name__ == "__main__":
         db.create_all()
     app.run()
 
+=======
+from flask import Flask, request, jsonify
+>>>>>>> 18d622b90ba1884787ec45d382b4faff8983e688
