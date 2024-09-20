@@ -2,4 +2,4 @@
 
 Our tech stack:
 Front-end: React
-Back-end: Node.js, Express.js
+Back-end: Python, Flask
