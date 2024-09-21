@@ -1,8 +1,8 @@
-.lessonOne {
+.lesson {
     text-align: center;
   }
   
-  .lessonOne-header {
+  .lesson-header {
     background-color: #5FA9E6  ;
     min-height: 1vh;
     display: flex;

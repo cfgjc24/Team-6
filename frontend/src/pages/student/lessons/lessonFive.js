@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import './lessonOne.css';
-import QuestionBox from '../../components/questionBox';
-import Modal from '../../components/Modal';
+import './lesson.css';
+import QuestionBox from '../../../components/questionBox';
+import Modal from '../../../components/Modal';
 
 const lessonData = {
 
   link: "https://www.canva.com/design/DAEqdhQurq8/YZFuXmX70XK7WZWIpLaEEg/edit",
   kahoot: "https://create.kahoot.it/share/check-lesson-6/13c58b08-e15e-4b69-af4e-5ffc618f4bb1",
   quizlet: "https://quizlet.com/614503406/lesson-2-what-is-a-stock-flash-cards/?x=1qqt",
-  lessonId: 1,
-  title: "Personal Finance",
+  lessonId: 5,
+  title: "Test",
   questions: [
     "Temp Q1",
     "Temp Q2",
@@ -20,7 +20,7 @@ const lessonData = {
 
 };
 
-const LessonOne = () => {
+const LessonFive = () => {
 
   const [answers, setAnswers] = useState(Array(lessonData.questions.length).fill('')); // array of answers
   const [submitted, setSubmitted] = useState(Array(lessonData.questions.length).fill(false));
@@ -47,21 +47,11 @@ const LessonOne = () => {
 
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   return (
 
-    <div className="lessonOne">
+    <div className="lesson">
 
-      <header className="lessonOne-header">
+      <header className="lesson-header">
 
         <h1>Lesson {lessonData.lessonId}</h1>
         <h1>{lessonData.title}</h1>
@@ -89,7 +79,7 @@ const LessonOne = () => {
         <a
           href={lessonData.kahoot}
           target="_blank"
-          rel="noopener noreferer"
+          rel="noopener noreferrer"
           className="lesson-link"
         >
           Kahoot
@@ -100,7 +90,7 @@ const LessonOne = () => {
         <a
           href={lessonData.quizlet}
           target="_blank"
-          rel="noopener noreferer"
+          rel="noopener noreferrer"
           className="lesson-link"
         >
           Quizlet
@@ -142,5 +132,5 @@ const LessonOne = () => {
   );
 
 };
-//test
-export default LessonOne;
+
+export default LessonFive;

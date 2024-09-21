@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 const original_lessons = [
-  { title: 'Personal Finance', link: '/lessonOne', status: 'completed' },
-  { title: 'What is a stock?', link: '/lessonOne', status: 'completed' },
-  { title: 'Volatility and Diversification', link: '/lessonOne', status: 'locked' },
-  { title: 'What is a bond?', link: '/lessonOne', status: 'locked' },
-  { title: 'Mutual Funds/ETFs', link: '/lessonOne', status: 'locked' },
-  { title: 'Compound Interest/Dollar-cost Averaging', link: '/lessonOne', status: 'locked' },
-  { title: 'Personal Finance II', link: '/lessonOne', status: 'locked' },
-  { title: 'Capstone Project', link: '/lessonOne', status: 'locked' },
+  { title: 'Personal Finance', link: '/lessons/lessonOne', status: 'completed' },
+  { title: 'What is a stock?', link: '/lessons/lessonTwo', status: 'completed' },
+  { title: 'Volatility and Diversification', link: '/lessons/lessonThree', status: 'locked' },
+  { title: 'What is a bond?', link: '/lessons/lessonFour', status: 'locked' },
+  { title: 'Mutual Funds/ETFs', link: '/lessons/lessonFive', status: 'locked' },
+  { title: 'Compound Interest/Dollar-cost Averaging', link: '/lessons/lessonSix', status: 'locked' },
+  { title: 'Personal Finance II', link: '/lessons/lessonSeven', status: 'locked' },
+  { title: 'Capstone Project', link: '/lessons/lessonEight', status: 'locked' },
 ];
 
 const StudentHome = () => {
