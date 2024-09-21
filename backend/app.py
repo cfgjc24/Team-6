@@ -48,10 +48,10 @@ def login():
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    password = request.form.get('password')
-    user_type = request.form.get('user_type')
-    first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
-    school = request.form.get('school')
+    password = request.json.get('password')
+    user_type = request.json.get('user_type')
+    first_name, last_name, email = request.json.get('first_name'), request.json.get('last_name'), request.json.get('email')
+    school = request.json.get('school')
     tutor = "Generic Finance Coach"
 
     user = None
