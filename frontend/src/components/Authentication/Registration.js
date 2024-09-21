@@ -10,6 +10,7 @@ function Registration() {
     confirmPassword: '',
     school: '',
     tutor: '',
+    usertype: ''
   });
 
   const [error, setError] = useState(null);
@@ -149,6 +150,21 @@ function Registration() {
             onChange={handleChange}
             required
           />
+        </div>
+        <div className="form-group">
+          <label htmlFor="user_type">Type</label>
+          <select
+            id="user_type"
+            name="user_type"
+            value={formData.user_type}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select type</option>
+            <option value="student">student</option>
+            <option value="admin">admin</option>
+            <option value="tutor">tutor</option>
+          </select>
         </div>
         <button type="submit" className="auth-button">
           Register
