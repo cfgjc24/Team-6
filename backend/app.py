@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect, send_file
 from flask_sqlalchemy import SQLAlchemy
+import tempfile
 
 from models import *
 
@@ -145,6 +146,16 @@ def retrieve_data(id):
         return "Error"
     
     return "No Error"
+
+# dump all data
+@app.route("/api/dump", methods=["GET"])
+def dump_data():
+    dumpfile = tempfile.NamedTemporaryFile()
+    with open(dumpfile.name, "w") as f:
+        f.write("id,first_name,last_name,email,school,password,tutor_count,lessons_completed_count\n")
+        for student in Student.query.all():
+            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{len(student.tutor)},{len(student.lessons_completed)}\n")
+    return send_file(dumpfile.name)
 
 if __name__ == "__main__":
     with app.app_context():
