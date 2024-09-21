@@ -22,14 +22,6 @@ def main():
 def api():
     return jsonify({"message": "Welcome to the API!"})
 
-# Get user profile
-@app.route("/api/users/<id>", methods=["GET"])
-def get_user(id):
-    user = user.error_or_404(id)
-    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
-    return jsonify(user_info)
-
 # Login API endpoint
 @app.route("/api/login", methods=["PUT"])
 def login():
@@ -40,8 +32,16 @@ def login():
 def register():
     return jsonify({"Successfully registered!"})
 
-@app.route("/student/<student_id>/retrieve_data", methods=["POST"])
-def retrieve_data(student_id):
+# Get user profile
+@app.route("/api/users/<user_type>/<id>", methods=["GET"])
+def get_user(user_type, id):
+    user = user.error_or_404(id)
+    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
+                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
+    return jsonify(user_info)
+
+@app.route("/api/users/student/<id>/retrieve_data", methods=["POST"])
+def retrieve_data(id):
     question_responses = []
     for response in request.json.get("questions"):
         if response:
@@ -56,7 +56,7 @@ def retrieve_data(student_id):
     biggest_challenge = request.json.get("confidence_level")
     suggestions = request.json.get("confidence_level")
 
-    this_lesson = Lesson(student_id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+    this_lesson = Lesson(student_id=id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
