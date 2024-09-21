@@ -1,12 +1,12 @@
 # Team-6
 
-Our tech stack:
-Front-end: React
-Back-end: Python, Flask
+### Our tech stack
+**Frontend**: React
+**Backend**: Python, Flask
 
-## Running locally
+### Running Locally
 
-Running the app:
+Run the backend server first:
 
 ```bash
 cd backend
@@ -16,15 +16,28 @@ pip install -r requirements.txt
 python3 app.py
 ```
 
-In a separate terminal:
+Then in a separate terminal, run the frontend server:
 
 ```bash
 cd frontend
 npm install
 npm start
 ```
-=======
-## Our tech stack:
-- Flask
-- Python
-- React
+
+### Team Members
+
+*(insert contributions here)*
+
+**Angelina**
+
+**Camilly**
+
+**Cathy**
+
+**Eduardo**
+
+**Elaine**
+
+**Malachi**
+
+**Samuel**
