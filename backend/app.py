@@ -215,9 +215,6 @@ def store_lesson_data(id, lesson_id):
             question_responses.append(QuestionResponse(response=response))
     lesson.question_responses = question_responses
 
-    completed = False
-    if len(question_responses) == len(lesson.questions):
-        lesson.completed = True
 
     #questions_answered = 0
     #for response in lesson.question_responses:
@@ -231,6 +228,7 @@ def store_lesson_data(id, lesson_id):
     lesson.belonging_level = request.json["belonging_level"]
     lesson.biggest_challenge = request.json["biggest_challenge"]
     lesson.suggestions = request.json["suggestions"]
+    lesson.completed = True
     
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
@@ -254,6 +252,22 @@ def get_lesson(lesson_id):
         "questions": questions
     }
     return lesson_info
+
+@app.route("/api/student/<int:id>/<int:lesson_id>/get_survey", methods=["GET"])
+def get_survey(id, lesson_id):
+    student = Student.query.get(id)
+    if not student:
+        return jsonify({"message": "Student not found!"}), 404
+    lesson = None
+    for this_lesson in student.lessons:
+        if this_lesson.id == lesson_id:
+            lesson = this_lesson
+    if not lesson:
+        return jsonify({"error": "Lesson not found"}), 404
+    question_responses = [response for response in lesson.question_responses]
+    survey_data = ({"confidence_level": lesson.confidence_level, "belonging_level": lesson.belonging_level, "biggest_challenge": lesson.biggest_challenge, "suggestions": lesson.suggestions, "completed": lesson.completed})
+    return jsonify(survey_data)
+    
 
 # Retrieve data from student
 @app.route("/api/student/<int:id>/retrieve_data", methods=["PUT"])
