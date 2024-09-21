@@ -30,6 +30,7 @@ def login():
 def register():
     return jsonify({"Successfully registered!"})
 
+
 # Get all students
 @app.route("/api/users/students", methods=["GET"])
 def get_students():
