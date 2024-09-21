@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
-# import SQLAlchemy
+from flask import Flask, request, jsonify, redirect
+from flask_sqlalchemy import SQLAlchemy
 
 from models import *
 
@@ -21,14 +21,52 @@ def api():
     return jsonify({"message": "Welcome to the API!"})
 
 # Login API endpoint
-@app.route("/api/login", methods=["PUT"])
+@app.route("/api/login", methods=["POST"])
 def login():
-   return jsonify({"Successfully logged in!"})
+    # TODO - resolve these three fields in the frontend
+    user_id, user_password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    user = None
+    if user_type == "student":
+        user = Student.query.get(user_id)
+    elif user_type == "tutor":
+        user = Tutor.query.get(user_id)
+    elif user_type == "admin":
+        # user = Admin.query.get(user_id)
+        # TODO - implement admin model
+        return redirect("/api/admin")
+    else:
+        return jsonify({"error": "Invalid user type"})
+    if user is None or user.password != user_password:
+        return jsonify({"error": "Invalid username or password"})
+    return redirect(f'/api/users/{user_type}/{user_id}')
 
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    return jsonify({"Successfully registered!"})
+    # TODO - resolve these three fields in the frontend
+    user_id, password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
+    school = request.form.get('school')
+    tutor = ["Generic Finance Coach"] # TODO - resolve this field
+    all_lessons = [] # TODO - resolve this field
+    lessons_completed = [] # TODO - resolve this field
+    
+    user = None
+    if user_type == "student":
+        if Student.query.get(user_id) is not None:
+            return jsonify({"error": "User already exists"})
+        user = Student(id=user_id, first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=[], all_lessons=all_lessons, lessons_completed=lessons_completed)
+    elif user_type == "tutor":
+        if Tutor.query.get(user_id) is not None:
+            return jsonify({"error": "User already exists"})
+        user = Tutor(id=user_id, first_name=first_name, last_name=last_name, email=email)
+    
+    try:
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/api/login")
+    except:
+        return jsonify({"error": "Error registering user"})
 
 
 # Get all students
