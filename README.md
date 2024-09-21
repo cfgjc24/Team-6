@@ -2,7 +2,15 @@
 
 ### Our tech stack
 **Frontend**: React
-**Backend**: Python, Flask
+**Backend**: Python, Flask, SQLAlchemy
+
+# Code For Good Hackathon
+
+## Backend Documentation
+
+**Design Decisions for Models:**
+1. **Student Model** <br/>
+    To seamlessly convert between the data's JSON and database representation, the first name, last name, email, school, password, and tutor should be set as non-nullable since they are all essential pieces of information in order to register a student in First Generation Investors. The Student Model additionally has an id so it can be uniquely identified. There is also a relationship on the Student after creating an association table for students and lessons. There is more information about the association table below.
 
 ### Running Locally
 
