@@ -5,6 +5,7 @@ import NavBar from './components/NavBar/NavBar';
 import StudentHome from './pages/student/Home';
 import AdditionalResources from './pages/student/AdditionalResources';
 import FAQ from './pages/student/FAQ';
+import LessonOne from './pages/student/lessonOne';
 import Registration from './components/Authentication/Registration';
 import Login from './components/Authentication/Login';
 
@@ -15,8 +16,9 @@ function App() {
       <Routes>
         <Route path="/home" element={<StudentHome />} />
         <Route path="/additionalresources" element={<AdditionalResources />} />
-        <Route path="/register" element={<Registration />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/lessonOne" element={<LessonOne />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>

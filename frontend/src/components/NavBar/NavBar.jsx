@@ -9,18 +9,14 @@ function NavBar() {
     <nav className="navbar">
       <div className="container navbar-content">
         <div className="navbar-brand">
-          <Link to="/" className="brand">
+          <Link to="/home" className="brand">
             <img src={Logo} alt="First Generation Investor" className="logo" />
           </Link>
         </div>
 
         <ul className="navbar-nav">
           <li className="nav-item">
-
             <Link to="/home" className="nav-link">Home</Link>
-
-            <Link to="/pages/student/home" className="nav-link">Home</Link>
-
           </li>
           <li className="nav-item">
             <Link to="/additionalresources" className="nav-link">Additional Resources</Link>

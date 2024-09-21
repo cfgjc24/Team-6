@@ -16,11 +16,7 @@
   color: black;
   font-size: 48px;
   font-weight: bold;
-=======
   padding: 20px;
-}
-
-.intro-text {
   margin-bottom: 30px;
   text-align: center;
 }
@@ -30,19 +26,20 @@
   flex-direction: row;
   width: 80%;
   color: black;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   padding: 20px;
   border-radius: 10px;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.left-container {
-  flex: 1;
-  padding: 20px;
-}
-
+.left-container,
 .right-container {
-  flex: 2;
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.5);
   padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .links-list {
@@ -69,7 +66,6 @@
 
 .lesson-item.notCompleted .check {
   color: gray;
-  border: none;
 }
 
 .lesson-item a {
@@ -80,50 +76,6 @@
 
 .lesson-item a:hover {
   color: #0056b3;
-}
-
-.home-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  background-image: url('../../background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: white;
-}
-
-.main-content {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  justify-content: space-between;
-}
-
-.left-container,
-.right-container {
-  width: 45%;
-}
-
-.left-container {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.right-container {
-  background-color: #f1f1f1;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.links-list {
-  list-style-type: none;
-  padding: 0;
 }
 
 .links-list li {
