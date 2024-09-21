@@ -58,6 +58,13 @@ def register():
         if Student.query.get(user_id) is not None:
             return jsonify({"error": "User already exists"})
         user = Student(id=user_id, first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=[], all_lessons=all_lessons, lessons_completed=lessons_completed)
+
+        lesson_1 = Lesson(title = "Stocks", completed=False, questions=["Are stocks money?", "Is it expensive?"], question_responses=[],
+                        confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link")
+        lesson_2 = Lesson(title = "Money", completed=False, questions=["Is money real?", "Is it green?"], question_responses=[],
+                        confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link2")
+        user.lessons = [lesson_1, lesson_2]
+
     elif user_type == "tutor":
         if Tutor.query.get(user_id) is not None:
             return jsonify({"error": "User already exists"})
@@ -154,6 +161,7 @@ def delete_student(id):
                      student.email, "school": student.school,})
     return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
 
+# Stores this lesson data for this student
 @app.route("/api/student/<int:id>/<int:lesson_id>/store_lesson_data", methods=["PATCH"])
 def store_lesson_data(id, lesson_id):
     student = Student.query.get(id)
