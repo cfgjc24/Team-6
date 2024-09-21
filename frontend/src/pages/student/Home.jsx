@@ -36,10 +36,10 @@ const StudentHome = () => {
       <div className="main-content">
         <div className="left-container">
           <h2>User Profile</h2>
-          <h4>First Name Last Name</h4>
-          <h4>Email</h4>
-          <h4>School</h4>
-          <h4>Tutors</h4>
+          <h4>John Smith</h4>
+          <h4>johnsmith@gmail.com</h4>
+          <h4>Johnson School</h4>
+          <h4>Alice, Bob</h4>
         </div>
 
         <div className="right-container">
