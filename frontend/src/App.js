@@ -17,6 +17,7 @@ function App() {
         <Route path="/additionalresources" element={<AdditionalResources />} />
         <Route path="/register" element={<Registration />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
