@@ -14,6 +14,8 @@ function Registration() {
     lessonsCompleted: '',
   });
 
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -22,14 +24,49 @@ function Registration() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+          school: formData.school,
+          tutor: formData.tutor,
+          user_type: formData.userType,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setSuccess(true);
+        setError(null);
+      } else {
+        setError(result.error || 'Registration failed');
+      }
+    } catch (error) {
+      setError('An error occurred during registration.');
+    }
   };
 
   return (
     <div className="auth-container">
       <h2>Create Your Account</h2>
+      {error && <div className="error-message">{error}</div>}
+      {success && <div className="success-message">Registration successful!</div>}
       <form className="auth-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="firstName">First Name</label>
