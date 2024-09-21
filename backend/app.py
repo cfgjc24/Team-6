@@ -27,8 +27,9 @@ def api():
 # Login API endpoint
 @app.route("/api/login", methods=["POST"])
 def login():
-    # TODO - resolve these three fields in the frontend
-    user_password, user_type, email = request.form.get('password'), request.form.get('user_type'), request.form.get('email')
+    user_password = request.form.get('password')
+    user_type = request.form.get('user_type')
+    email = request.form.get('email')
     user = None
     if user_type == "student":
         user = Student.query.filter_by(email=email).first()
@@ -47,11 +48,12 @@ def login():
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    password, user_type = request.form.get('password'), request.form.get('user_type')
+    password = request.form.get('password')
+    user_type = request.form.get('user_type')
     first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
     school = request.form.get('school')
-    tutor = "Generic Finance Coach" # TODO - resolve this field
-    
+    tutor = "Generic Finance Coach"
+
     user = None
     if user_type == "student":
         if Student.query.filter_by(email=email).first():
@@ -62,15 +64,13 @@ def register():
         if Tutor.query.filter_by(email=email).first():
             return jsonify({"error": "User already exists"})
         user = Tutor(first_name=first_name, last_name=last_name, email=email)
-    
+
     try:
         db_.session.add(user)
         db_.session.commit()
-        # TODO redirect to user profile or login page
-        return redirect("/api/login")
+        return redirect(f"/api/student/{user.id}")
     except Exception as e:
-        print(e)
-        return jsonify({"error": "Error registering user"})
+        return jsonify({"error": "Error registering user"}), 400
 
 
 
@@ -153,7 +153,7 @@ def get_user(id):
         return jsonify({"error": "User not found"}), 404
 
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "lessons": user.lessons[0].title}
+                 "tutor": user.tutor}
     return jsonify(user_info)
 
 # Modify a student
@@ -204,8 +204,17 @@ def store_lesson_data(id, lesson_id):
     if not lesson:
         return jsonify({"message": "Lesson not found!"}), 404
     
-    # TODO: fix for question responses after the model is finalized!
     #lesson.question_responses = request.json.get("question_responses", lesson.question_responses)
+    question_responses = []
+    for response in request.json["question_responses"]:
+        if response:
+            question_responses.append(QuestionResponse(response=response))
+    lesson.question_responses = question_responses
+
+    completed = False
+    if len(question_responses) == len(lesson.questions):
+        lesson.completed = True
+
     #questions_answered = 0
     #for response in lesson.question_responses:
     #    if response:
@@ -214,17 +223,18 @@ def store_lesson_data(id, lesson_id):
     #if questions_answered == len(lesson.question_responses):
     #    lesson.completed = True
     
-    lesson.confidence_level = request.json.get("confidence_level", lesson.confidence_level)
-    lesson.belonging_level = request.json.get("belonging_level", lesson.belonging_level)
-    lesson.biggest_challenge = request.json.get("biggest_challenge", lesson.biggest_challenge)
-    lesson.suggestions = request.json.get("suggestions", lesson.suggestions)
+    lesson.confidence_level = request.json["confidence_level"]
+    lesson.belonging_level = request.json["belonging_level"]
+    lesson.biggest_challenge = request.json["biggest_challenge"]
+    lesson.suggestions = request.json["suggestions"]
     
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
 
 # Get lesson data for a certain student, lesson_id here isn't the actual lesson_id, but rather, the index of the lesson in the student.lessons
-@app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
-def get_lesson(id, lesson_id):
+@app.route("/api/course/<int:lesson_id>", methods=["GET"])
+def get_lesson(lesson_id):
+    id = 1
     lessons = Student.query.get(id).lessons
     lesson = lessons[lesson_id-1]
     if not lesson:
@@ -242,23 +252,29 @@ def get_lesson(id, lesson_id):
     return lesson_info
 
 # Retrieve data from student
-@app.route("/api/student/<int:id>/retrieve_data", methods=["POST"])
+@app.route("/api/student/<int:id>/retrieve_data", methods=["PUT"])
 def retrieve_data(id):
+    student = Student.query.get(id)
     question_responses = []
     for response in request.json.get("questions"):
         if response:
-            question_responses.append(response)
+            question_responses.append(QuestionResponse(response=response))
+
+    lesson = None
+    for this_lesson in student.lessons:
+        if this_lesson.id == lesson_id:
+            lesson = this_lesson
 
     completed = False
     if len(question_responses) == len(request.json.get("questions")):
-        completed = True
+        lesson.completed = True
     
-    confidence_level = request.json.get("confidence_level")
-    belonging_level = request.json.get("confidence_level")
-    biggest_challenge = request.json.get("confidence_level")
-    suggestions = request.json.get("confidence_level")
+    lesson.confidence_level = request.json.get("confidence_level")
+    lesson.belonging_level = request.json.get("belonging_level")
+    lesson.biggest_challenge = request.json.get("biggest_challenge")
+    lesson.suggestions = request.json.get("suggestions")
 
-    this_lesson = Lesson(student_id=id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+    this_lesson = Lesson(completed=completed, question_responses=question_responses, confidence_level=confidence_level,
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
