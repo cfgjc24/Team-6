@@ -47,23 +47,28 @@ lesson_completed_lessons = db_.Table('lesson_lessons_completed',
 )
 
 class Lesson(db_.Model):
-    id = db_.Column(db_.Integer, primary_key=True)
+    id = db_.Column(db_.Integer, primary_key=True, autoincrement=True)
     title = db_.Column(db_.String(120), unique=False, nullable=False)
+    questions = relationship('Question', secondary=lesson_question, back_populates='lessons')
+    slide_link = db_.Column(db_.String(100), unique=False, nullable=False)
+    kahoot_link = db_.Column(db_.String(100), unique=False, nullable=False)
+    quizlet_link = db_.Column(db_.String(100), unique=False, nullable=False)
     completed = db_.Column(db_.Boolean, unique=False, nullable=False)
     confidence_level = db_.Column(db_.Integer, unique=False, nullable=True)
     belonging_level = db_.Column(db_.Integer, unique=False, nullable=True)
     biggest_challenge = db_.Column(db_.String(120), unique=False, nullable=True)
     suggestions = db_.Column(db_.String(120), unique=False, nullable=True)
-    slide_link = db_.Column(db_.String(100), unique=True, nullable=False)
-    quizlet_link = db_.Column(db_.String(100), unique=True, nullable=False)
-    kahoot_link = db_.Column(db_.String(100), unique=True, nullable=False)
     students = relationship('Student', secondary=student_lesson_association, back_populates='lessons')
+    question_responses = relationship('QuestionResponse', secondary=lesson_question_response, back_populates='lessons')
 
 class Question(db_.Model):
     id = db_.Column(db_.Integer, primary_key=True)
+    question = db_.Column(db_.String(120), unique=False, nullable=False)
+    lessons = relationship('Lesson', secondary=lesson_question, back_populates='questions')
 
 class QuestionResponse(db_.Model):
     id = db_.Column(db_.Integer, primary_key=True)
+    lessons = relationship('Lesson', secondary=lesson_question_response, back_populates='question_responses')
 
 class AllLessons(db_.Model):
     id = db_.Column(db_.Integer, primary_key=True)
