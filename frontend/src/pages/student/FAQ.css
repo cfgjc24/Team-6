@@ -6,20 +6,20 @@
 
 .faq-container h1 {
   text-align: center;
-  color: #333;
+  color: black;
   margin-bottom: 30px;
 }
 
 .faq-item {
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 15px;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .faq-item h2 {
-  color: #007bff;
+  color: #5FA9E6;
   margin-bottom: 10px;
   font-size: 20px;
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './NavBar.css';
+import Logo from '../../Logo.png';
 
 function NavBar() {
   return (
@@ -9,7 +10,7 @@ function NavBar() {
       <div className="container navbar-content">
         <div className="navbar-brand">
           <Link to="/" className="brand">
-            First Generation Investor
+            <img src={Logo} alt="First Generation Investor" className="logo" />
           </Link>
         </div>
 

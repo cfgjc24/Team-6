@@ -32,15 +32,15 @@ const FAQ = () => {
         <p>
           Dramatically increase the number of “First Generation Investors” - young people who begin to benefit from ownership of stocks. Teach high school students about: long-term saving, including the concepts of compounding, diversification and dollar-cost averaging,
           what stocks are and how they work, and how to participate in the investment economy.
-          Ultimately, help large numbers of people to benefit from stock market returns</p>
+          Ultimately, FGI helps large numbers of people to benefit from stock market returns.</p>
       </div>
 
       <div className="contact-container">
         <h2>Contact Us</h2>
         <p>If you have any further questions, feel free to contact us:</p>
         <ul>
-          <li><strong>Dylan Ingerman (CEO):</strong>Dylan@firstgenerationinvestors.com</li>
-          <li><strong>Cole Mattox (VP):</strong>firstgenerationinvestors.com</li>
+          <li><strong>Dylan Ingerman (CEO): </strong><a href="mailto:Dylan@firstgenerationinvestors.com">Dylan@firstgenerationinvestors.com</a></li>
+          <li><strong>Cole Mattox (VP): </strong><a href="mailto:Cole@firstgenerationinvestors.com">Cole@firstgenerationinvestors.com</a></li>
         </ul>
       </div>
 

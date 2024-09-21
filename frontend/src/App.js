@@ -13,10 +13,9 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
-        {/* Route for the Additional Resources page */}
         <Route path="/home" element={<StudentHome />} />
         <Route path="/additional" element={<AdditionalResources />} />
-        <Route path="/register" element={<Registration />} /> {/* Add the registration route */}
+        <Route path="/register" element={<Registration />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/login" element={<Login />} />
       </Routes>
