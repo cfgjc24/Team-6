@@ -235,7 +235,7 @@ def get_lesson(id, lesson_id):
     if not lesson:
         return jsonify({"error": "User not found"}), 404
 
-    lesson_info = {"title": lesson.title, "quizlet_link": lesson.quizlet_link}
+    lesson_info = {"title": lesson.title, "quizlet_link": lesson.quizlet_link, "slide_link": lesson.slide_link, "kahoot_link": lesson.kahoot_link}
     return jsonify(lesson_info)
 
 # Retrieve data from student
