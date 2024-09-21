@@ -43,9 +43,9 @@
 2. **Logical Nesting on Endpoints** <br/>
    I also used logical nesting on the endpoints. For example, since the confidence level of a student on a lesson is contained within the administrator the confidence is added after `api/admin` to indicate the parent-child relationship. 
 3. **Consistency in Naming** <br/>
-   For collections, I used plural nouns to clarify when there is collection of resources rather than one resource. 
+   For collections, plural nouns were used when there is collection of resources rather than one resource. 
 4. **Error Handling** <br/>
-   In the event that the request is successful or unsuccessful, I used status codes to update the user. For example, I used 404 for username not found and 201 for a successful creation of a new club.
+   In the event that the request is successful or unsuccessful, status codes are used to update the user. For example, I used 404 for student not found and 201 for a successful creation of a new student.
 
 ### Running Locally
 
