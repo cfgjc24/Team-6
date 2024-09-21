@@ -20,22 +20,32 @@
     The Student table and the Lesson table are connected with an association table so that a student can have many lessons and a lesson can have many students. It represents a many-to-many relationship. The association table is above the Student table so it can be used a secondary in the Student table. The back reference in the Student table serves as a pseudo column that gets created on the Lesson table to allow the backend team to see all of the lessons for a certain student. Similar association tables were created to connect lessons and questions, lessons and question responses, and lesson and lessons completed.
 
 **Admin Routes <br/>**
-1. /api/login, POST
-2. /api/register, POST
-3. /api/admin/confidence, GET
-4. /api/admin/confidence/<int:lesson_id>, GET
-5. /api/admin/belonging, GET
-6. /api/admin/students, GET
-7. /api/admin/dump, GET
-8. /api/admin/dump/lesson, GET
+1. `/api/login, POST`
+2. `/api/register, POST`
+3. `/api/admin/confidence, GET`
+4. `/api/admin/confidence/<int:lesson_id>, GET`
+5. `/api/admin/belonging, GET`
+6. `/api/admin/students, GET`
+7. `/api/admin/dump, GET`
+8. `/api/admin/dump/lesson, GET`
 
 **Student Routes <br/>**
-1. /api/student/<int:id>, GET
-2. /api/student/<int:id>, PUT
-3. /api/student/<int:id>, DELETE
-4. /api/student/<int:id>/<int:lesson_id>/store_lesson_data, PATCH
-5. /api/student/<int:id>/<int:lesson_id>, GET
-6. /api/student/<int:id>/retrieve_data, POST
+1. `/api/student/<int:id>, GET`
+2. `/api/student/<int:id>, PUT`
+3. `/api/student/<int:id>, DELETE`
+4. `/api/student/<int:id>/<int:lesson_id>/store_lesson_data, PATCH`
+5. `/api/student/<int:id>/<int:lesson_id>, GET`
+6. `/api/student/<int:id>/retrieve_data, POST`
+
+**Design Choices for API and Routing <br/>**
+1. **No verbs in Endpoint Paths**
+   Because verbs are already in the HTTP requests (GET, PUT, POST, DELETE), the HTTP request tells us what the endpoint does and we do not have to include verbs such as get or delete in the path. 
+2. **Logical Nesting on Endpoints** <br/>
+   I also used logical nesting on the endpoints. For example, since the confidence level of a student on a lesson is contained within the administrator the confidence is added after `api/admin` to indicate the parent-child relationship. 
+3. **Consistency in Naming** <br/>
+   For collections, I used plural nouns to clarify when there is collection of resources rather than one resource. 
+4. **Error Handling** <br/>
+   In the event that the request is successful or unsuccessful, I used status codes to update the user. For example, I used 404 for username not found and 201 for a successful creation of a new club.
 
 ### Running Locally
 
