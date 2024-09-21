@@ -1,7 +1,7 @@
 import os
 import json
 
-from app import app, db, DB_FILE
+from app import *
 from models import *
 from flask_sqlalchemy import SQLAlchemy
 

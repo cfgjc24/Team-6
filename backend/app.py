@@ -54,9 +54,9 @@ def get_user(id):
 @app.route('/api/users/students/<id>', methods=['PUT'])
 def update_student(id):
     data = request.get_json()
-    student = Student.query.filter_by(name=name).first_or_404()
-    student.name = data.get('name', student.name)
-    student.description = data.get('description', student.description)
+    student = Student.query.filter_by(id=id).first_or_404()
+    student.first_name = data.get('first_name', student.first_name)
+    student.last_name = data.get('last_name', student.last_name)
     student.email = data.get('email', student.email)
     student.school = data.get('school', student.school)
     student.tutor = data.get('tutor', student.tutor)
@@ -106,7 +106,6 @@ def retrieve_data(id):
         db.session.commit()
     except:
         return "Error"
-    
     return "No Error"
 
 if __name__ == "__main__":
