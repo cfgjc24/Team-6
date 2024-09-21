@@ -154,6 +154,38 @@ def delete_student(id):
                      student.email, "school": student.school,})
     return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
 
+@app.route("/api/student/<int:id>/<int:lesson_id>/store_lesson_data", methods=["PATCH"])
+def store_lesson_data(id, lesson_id):
+    student = Student.query.get(id)
+
+    if not student:
+        return jsonify({"message": "Student not found!"}), 404
+
+    lesson = None
+    for this_lesson in student.lessons:
+        if this_lesson.id == lesson_id:
+            lesson = this_lesson
+
+    if not lesson:
+        return jsonify({"message": "Lesson not found!"}), 404
+    
+    lesson.question_responses = request.json.get("question_responses", lesson.question_responses)
+    questions_answered = 0
+    for response in lesson.question_responses:
+        if response:
+            question_answered += 1
+
+    if questions_answered == len(lesson.question_responses):
+        lesson.completed = True
+    
+    lesson.confidence_level = request.json.get("confidence_level", lesson.confidence_level)
+    lesson.belonging_level = request.json.get("belonging_level", lesson.belonging_level)
+    lesson.biggest_challenge = request.json.get("biggest_challenge", lesson.biggest_challenge)
+    lesson.suggestions = request.json.get("suggestions", lesson.suggestions)
+    
+    db.session.commit()
+    return jsonify({"message": "Lesson Stored!"})
+
 # Retrieve data from student
 @app.route("/api/users/student/<id>/retrieve_data", methods=["POST"])
 def retrieve_data(id):
