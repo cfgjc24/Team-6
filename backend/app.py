@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+# import SQLAlchemy
 
 from models import *
 
-DB_FILE = "studenttutor.db"
+DB_FILE = "fgi.db"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
@@ -29,6 +29,7 @@ def login():
 @app.route("/api/register", methods=["POST"])
 def register():
     return jsonify({"Successfully registered!"})
+
 
 # Get all students
 @app.route("/api/users/students", methods=["GET"])
