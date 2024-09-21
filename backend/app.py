@@ -93,7 +93,7 @@ def get_lesson_confidence_level(lesson_id):
 
 # Get average belonging levels for each lesson
 @app.route("/api/admin/belonging", methods=["GET"])
-def get_confidence_levels():
+def get_belonging_levels():
     belonging_levels = defaultdict(list)
     belonging_level_per_lesson = defaultdict(int)
     all_students = Student.query.all()  
