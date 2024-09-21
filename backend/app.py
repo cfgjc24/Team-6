@@ -223,11 +223,14 @@ def store_lesson_data(id, lesson_id):
 # Get lesson data for a certain student
 @app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
 def get_lesson(id, lesson_id):
-    lesson = Student.query.get(id).lessons[lesson_id-1]
+    lessons = Student.query.get(id).lessons
+    min_lesson_id = lessons[0].id
+    max_lesson_id = lessons[-1].id
+    lesson = lessons[lesson_id - min_lesson_id]
     if not lesson:
         return jsonify({"error": "User not found"}), 404
 
-    lesson_info = {"title": lesson.title, "confidence_level": lesson.confidence_level}
+    lesson_info = {"title": lesson.title, "quizlet_link": lesson.quizlet_link}
     return jsonify(lesson_info)
 
 # Retrieve data from student

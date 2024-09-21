@@ -8,7 +8,21 @@
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEqdhQurq8/YZFuXmX70XK7WZWIpLaEEg/edit",
         "kahoot_link": "https://create.kahoot.it/share/check-lesson-1/4a6ebec8-5cd2-479a-93cd-2121af5a76ba",
-        "quizlet_link": "https://quizlet.com/614499290/lesson-1-personal-finance-flash-cards/?x=1jqt"
+        "quizlet_link": "https://quizlet.com/614499290/lesson-1-personal-finance-flash-cards/?x=1jqt",
+        "questions": [
+            {
+                "question": "What is the first step in creating a budget?"
+            },
+            {
+                "question": "What is the second step in creating a budget?"
+            },
+            {
+                "question": "What is the third step in creating a budget?"
+            },
+            {
+                "question": "What is the fourth step in creating a budget?"
+            }
+        ]
     },
     {
         "title": "What is a Stock?",
@@ -18,8 +32,10 @@
         "biggest_challenge": null,
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEpi95ye1M/HBcbIaVuniYDgMZO0ukLbQ/edit",
-        "kahoot_likn": "https://create.kahoot.it/share/check-lesson-2/f9dfcb74-d0ca-4fc6-856a-3127371e0250",
-        "quizlet_link": "https://quizlet.com/614503406/lesson-2-what-is-a-stock-flash-cards/?x=1qqt"
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-2/f9dfcb74-d0ca-4fc6-856a-3127371e0250",
+        "quizlet_link": "https://quizlet.com/614503406/lesson-2-what-is-a-stock-flash-cards/?x=1qqt",
+        "questions": []
+
     },
     {
         "title": "Volatility and Diversification",
@@ -30,7 +46,8 @@
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEpi6tckaE/vYF9Z9izUbT2aOKtS6_xZg/view?utm_content=DAEpi6tckaE&utm_campaign=designshare&utm_medium=link&utm_source=editor",
         "kahoot_link": "https://create.kahoot.it/share/check-lesson-4/0655135b-bb9c-42e1-be6c-e37a6d616676",
-        "quizlet_link": "https://quizlet.com/614501800/lesson-3-diversification-and-volatility-flash-cards/"
+        "quizlet_link": "https://quizlet.com/614501800/lesson-3-diversification-and-volatility-flash-cards/",
+        "questions": []
     },
     {
         "title": "What is a Bond?",
@@ -41,7 +58,8 @@
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEqdo4lTSg/ddYn_uWqnVunQPcSqo9aRg/view?utm_content=DAEqdo4lTSg&utm_campaign=designshare&utm_medium=link&utm_source=editor",
         "kahoot_link": "https://create.kahoot.it/share/check-lesson-3/8d5c09ba-284c-422b-8ed3-fac70e2774c9",
-        "quizlet_link": "https://quizlet.com/614505272/lesson-4-what-is-a-bond-flash-cards/?x=1qqt"
+        "quizlet_link": "https://quizlet.com/614505272/lesson-4-what-is-a-bond-flash-cards/?x=1qqt",
+        "questions": []
     },
     {
         "title": "Mutual Funds/ETFs",
@@ -52,7 +70,8 @@
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEp0bQDqJE/2HzXkanZm9i3-s0xX7BrxQ/edit",
         "kahoot_link": "https://create.kahoot.it/share/check-lesson-5/30cfa912-4b4c-4fb5-b654-5114dfc81aad",
-        "quizlet_link": "https://quizlet.com/614506210/lesson-5-mutual-fundsetfs-flash-cards/?x=1qqt"
+        "quizlet_link": "https://quizlet.com/614506210/lesson-5-mutual-fundsetfs-flash-cards/?x=1qqt",
+        "questions": []
     },
     {
         "title": "Compound Interest and Dollar-Cost Averaging",
@@ -63,17 +82,19 @@
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEpi0ibGoU/du-ip1g8hlWc3xDSxL0UBQ/edit",
         "kahoot_link": "https://create.kahoot.it/share/check-lesson-6/13c58b08-e15e-4b69-af4e-5ffc618f4bb1",
-        "quizlet_link": "https://quizlet.com/614507027/lesson-6-compound-interest-and-dca-flash-cards/?x=1qqt"
+        "quizlet_link": "https://quizlet.com/614507027/lesson-6-compound-interest-and-dca-flash-cards/?x=1qqt",
+        "questions": []
     },
     {
         "title": "Personal Finance Part II",
-        "completed": true,
+        "completed": false,
         "confidence_level": null,
         "belonging_level": null,
         "biggest_challenge": null,
         "suggestions": null,
         "slide_link": "https://www.canva.com/design/DAEqdsGCfIs/rrJwRs1BnTMxy5sWjWqXXg/edit",
         "kahoot_link": "https://play.kahoot.it/v2/?quizId=94150caa-de03-4f7c-91ae-6e97daea45bd",
-        "quizlet_link": "https://quizlet.com/614507924/lesson-7-personal-finance-20-flash-cards/?x=1qqt"
+        "quizlet_link": "https://quizlet.com/614507924/lesson-7-personal-finance-20-flash-cards/?x=1qqt",
+        "questions": []
     }
 ]
