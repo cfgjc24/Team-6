@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-# import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 
 from models import *
 
@@ -23,7 +23,8 @@ def api():
 # Login API endpoint
 @app.route("/api/login", methods=["PUT"])
 def login():
-   return jsonify({"Successfully logged in!"})
+   return jsonify({"message": "Successfully logged in!"})
+
 
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])

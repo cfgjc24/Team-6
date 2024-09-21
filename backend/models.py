@@ -33,6 +33,8 @@ class Lesson(db.Model):
     biggest_challenge = db.Column(db.String(120), unique=False, nullable=True)
     suggestions = db.Column(db.String(120), unique=False, nullable=True)
     slide_link = db.Column(db.String(100), unique=True, nullable=False)
+    quizlet_link = db.Column(db.String(100), unique=True, nullable=False)
+    kahoot_link = db.Column(db.String(100), unique=True, nullable=False)
     students = relationship('Student', secondary=student_lesson_association, back_populates='lessons')
 
 # Define tutor model for database
