@@ -14,6 +14,8 @@
 2. **Lesson Model** <br/>
    To represent lessons, I chose to include fields for title, completed, confidence level, belonging level, biggest challenge, suggestions, slides link, Quizlet link, and Kahoot link. The main focus of this web application is to allow administrators to effectively track their metriccs so there are multiple fields here.
    All fields are not unique since each student can have the same answers for all of the fields except for the slide link, Quizlet link, and Kahoot link because links should be unique. There is more about the association tables below.
+3. **Tutor Model** <br />
+    The fields that were included in the tutor model were first name, last name, and email. None of these fields are nullable because they would be required for the tutor to sign up and the student would need the tutor's email to contact them.
 
 ### Running Locally
 
