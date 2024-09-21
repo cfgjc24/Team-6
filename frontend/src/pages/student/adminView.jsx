@@ -18,10 +18,10 @@ const AdminView = () => {
 
     };
 
-    const handleExportCSV = async (type) => {
+    const handleExportCSV = async (path) => {
         try {
 
-            const response = await fetch(`127.0.0.1:5000/api/admin/dump/${type}`, {
+            const response = await fetch(path, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/csv',
@@ -36,7 +36,7 @@ const AdminView = () => {
                 const a = document.createElement('a');
                 a.href = url;
 
-                a.download = `${type}-data.csv`; 
+                a.download = `data.csv`; 
                 document.body.appendChild(a); 
                 a.click(); 
                 a.remove();
@@ -120,8 +120,8 @@ const AdminView = () => {
 
                 <h2>Export CSV's</h2>
                 <button className="export-btn" style={{ marginRight: '5px' }}>Export this Page</button>
-                <button onClick={() => handleExportCSV('')}className="export-btn">Export Users</button>
-                <button onClick={() => handleExportCSV('lessons')} className="export-btn" style={{ marginLeft: '5px' }}>Export Lessons</button>
+                <button onClick={() => handleExportCSV('http://127.0.0.1:5000/api/admin/dump')}className="export-btn">Export Users</button>
+                <button onClick={() => handleExportCSV('http://127.0.0.1:5000/api/admin/dump/lesson')} className="export-btn" style={{ marginLeft: '5px' }}>Export Lessons</button>
 
             </section>
 
