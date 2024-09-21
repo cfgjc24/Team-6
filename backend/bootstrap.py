@@ -29,6 +29,8 @@ def load_lesson_data():
                 questions.append(question)
 
             lesson = Lesson(
+                confidence_level=lesson['confidence_level'],
+                belonging_level=lesson['belonging_level'],
                 title=lesson['title'],
                 questions=questions,
                 slide_link=lesson['slide_link'],
