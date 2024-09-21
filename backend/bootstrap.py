@@ -1,0 +1,43 @@
+import os
+import json
+
+from app import app, db, DB_FILE
+from models import *
+# import SQLAlchemy
+
+# Create a student named 'cole' with required fields
+def create_student():
+    user = Student(id='cole', first_name='Cole', last_name='Williams',
+        email='cole@wharton.upenn.edu', school='Penn', password='qwerty', 
+        tutor=['Jane', 'Josh'], all_lessons=['Personal Finance', 'What is a stock', 
+        'Volatility and diversification', 'What is a bond', 'Mutual Funds/ETFs',
+        'Compound Interest and Dollar-Cost Averaging', 'Personal Finance II'], 
+        lessons_completed=['Personal Finance', 'What is a stock', 
+        'Volatility and diversification', 'What is a bond']), 
+    db.session.add(user)
+    db.session.commit()
+    print("Student created.")
+
+# Load students.json to the database
+def load_data():
+    with open('students.json') as file:
+        data = json.load(file)
+        for student in data:
+            user = Student(id=student['id'], first_name=student['first_name'], last_name=student['last_name'],
+                email=student['email'], school=student['school'], password=student['password'], 
+                tutor=student['tutor'], all_lessons=student['all_lessons'], 
+                lessons_completed=student['lessons_completed'])
+            db.session.add(user)
+        db.session.commit()
+        print("Data loaded.")
+
+if __name__ == "__main__":
+    # Delete existing database before bootstrapping a new one
+    LOCAL_DB_FILE = "instance/" + DB_FILE
+    if os.path.exists(LOCAL_DB_FILE):
+        os.remove(LOCAL_DB_FILE)
+
+    with app.app_context():
+        db.create_all()
+        create_student()
+        load_data()

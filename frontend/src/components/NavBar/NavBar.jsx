@@ -16,7 +16,11 @@ function NavBar() {
 
         <ul className="navbar-nav">
           <li className="nav-item">
+
             <Link to="/home" className="nav-link">Home</Link>
+
+            <Link to="/pages/student/home" className="nav-link">Home</Link>
+
           </li>
           <li className="nav-item">
             <Link to="/additionalresources" className="nav-link">Additional Resources</Link>
