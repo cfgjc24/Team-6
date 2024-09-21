@@ -226,7 +226,7 @@ def store_lesson_data(id, lesson_id):
 @app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
 def get_lesson(id, lesson_id):
     lessons = Student.query.get(id).lessons
-    lesson = lessons[lesson_id]
+    lesson = lessons[lesson_id-1]
     if not lesson:
         return jsonify({"error": "User not found"}), 404
 
