@@ -156,8 +156,9 @@ def get_user(id):
     if not user:
         return jsonify({"error": "User not found"}), 404
 
+    lessons = [lessons.title for lessons in user.lessons]
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor}
+                 "tutor": user.tutor, "lessons": lessons}
     return jsonify(user_info)
 
 # Modify a student
@@ -267,7 +268,30 @@ def get_survey(id, lesson_id):
     question_responses = [response for response in lesson.question_responses]
     survey_data = ({"confidence_level": lesson.confidence_level, "belonging_level": lesson.belonging_level, "biggest_challenge": lesson.biggest_challenge, "suggestions": lesson.suggestions, "completed": lesson.completed})
     return jsonify(survey_data)
-    
+
+@app.route("/api/admin/get_all")
+def get_all():
+    all_data = []
+    students = Student.query.all() 
+
+    for student in students:
+        for lesson in student.lessons:
+            lesson_data = {
+                    "first_name": student.first_name,
+                    "last_name": student.last_name,
+                    "email": student.email,
+                    "school": student.school,
+                    "tutor": student.tutor,
+                    "lesson_title": lesson.title,
+                    "completed": lesson.completed,
+                    "confidence_level": lesson.confidence_level,
+                    "belonging_level": lesson.belonging_level,
+                    "biggest_challenge": lesson.biggest_challenge,
+                    "suggestions": lesson.suggestions
+            }
+        all_data.append(lesson_data)
+
+    return jsonify(all_data)
 
 # Retrieve data from student
 @app.route("/api/student/<int:id>/retrieve_data", methods=["PUT"])
