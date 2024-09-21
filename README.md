@@ -16,7 +16,7 @@
    All fields are not unique since each student can have the same answers for all of the fields except for the slide link, Quizlet link, and Kahoot link because links should be unique. There is more about the association tables below.
 3. **Tutor Model** <br />
     The fields that were included in the tutor model were first name, last name, and email. None of these fields are nullable because they would be required for the tutor to sign up and the student would need the tutor's email to contact them.
-4. **Association Table to Associate Tags with Clubs** <br/>
+4. **Association Tables** <br/>
     The Student table and the Lesson table are connected with an association table so that a student can have many lessons and a lesson can have many students. It represents a many-to-many relationship. The association table is above the Student table so it can be used a secondary in the Student table. The back reference in the Student table serves as a pseudo column that gets created on the Lesson table to allow the backend team to see all of the lessons for a certain student. Similar association tables were created to connect lessons and questions, lessons and question responses, and lesson and lessons completed.
 
 **Admin Routes <br/>**
@@ -70,8 +70,6 @@ npm start
 - Flask
 - Python
 - React
-
-*(insert contributions here)*
 
 **Angelina**
 
