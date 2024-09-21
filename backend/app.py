@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 
 
 
+##### LOGIN ENDPOINTS #####
 # Welcome user to First Generation Investors
 @app.route("/")
 def main():
@@ -79,6 +80,9 @@ def register():
     except:
         return jsonify({"error": "Error registering user"})
 
+
+
+##### ADMIN ENDPOINTS #####
 # Get average confidence levels for each lesson
 @app.route("/api/admin/confidence", methods=["GET"])
 def get_confidence_levels():
@@ -113,7 +117,6 @@ def get_belonging_levels():
         belonging_level_per_lesson[lesson.id] = sum(belonging_levels[lesson])/len(belonging_levels[lesson])
     return jsonify(belonging_level_per_lesson)
 
-
 # Get all students
 @app.route("/api/admin/students", methods=["GET"])
 def get_students():
@@ -124,6 +127,30 @@ def get_students():
                              "tutor": student.tutor, "all_lessons": student.all_lessons, "lessons_completed": student.lessons_completed})
     return jsonify(student_list)
 
+# dump all data
+@app.route("/api/admin/dump", methods=["GET"])
+def dump_data():
+    dumpfile = tempfile.NamedTemporaryFile()
+    with open(dumpfile.name, "w") as f:
+        f.write("id,first_name,last_name,email,school,password,tutor_count,lessons_completed_count\n")
+        for student in Student.query.all():
+            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{len(student.tutor)},{len(student.lessons_completed)}\n")
+    return send_file(dumpfile.name)
+
+# Get a CSV with lessons data
+@app.route("/api/admin/dump/lesson", methods=["GET"])
+def dump_lesson_data():
+    dumpfile = tempfile.NamedTemporaryFile()
+    with open(dumpfile.name, "w") as f:
+        f.write("id,title,student_first_name,student_last_name,student_id,question_responses,confidence_level,belonging_level,biggest_challenge,suggestions\n")
+        for student in Student.query.all():
+            for lesson in student.lessons:
+                f.write(f"{lesson.id},{lesson.title},{student.first_name},{student.last_name},{student.id},{lesson.question_responses},{lesson.confidence_level},{lesson.belonging_level},{lesson.biggest_challenge},{lesson.suggestions}\n")
+    return send_file(dumpfile.name)
+
+
+
+##### STUDENT ENDPOINTS #####
 # Get user profile
 @app.route("/api/student/<int:id>", methods=["GET"])
 def get_user(id):
@@ -223,27 +250,6 @@ def retrieve_data(id):
         return "Error"
     
     return "No Error"
-
-# dump all data
-@app.route("/api/admin/dump", methods=["GET"])
-def dump_data():
-    dumpfile = tempfile.NamedTemporaryFile()
-    with open(dumpfile.name, "w") as f:
-        f.write("id,first_name,last_name,email,school,password,tutor_count,lessons_completed_count\n")
-        for student in Student.query.all():
-            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{len(student.tutor)},{len(student.lessons_completed)}\n")
-    return send_file(dumpfile.name)
-
-# Get a CSV with lessons data
-@app.route("/api/admin/dump/lesson", methods=["GET"])
-def dump_lesson_data():
-    dumpfile = tempfile.NamedTemporaryFile()
-    with open(dumpfile.name, "w") as f:
-        f.write("id,title,student_first_name,student_last_name,student_id,question_responses,confidence_level,belonging_level,biggest_challenge,suggestions\n")
-        for student in Student.query.all():
-            for lesson in student.lessons:
-                f.write(f"{lesson.id},{lesson.title},{student.first_name},{student.last_name},{student.id},{lesson.question_responses},{lesson.confidence_level},{lesson.belonging_level},{lesson.biggest_challenge},{lesson.suggestions}\n")
-    return send_file(dumpfile.name)
 
 
 
