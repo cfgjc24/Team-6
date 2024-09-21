@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 const original_lessons = [
-  { title: 'Personal Finance', link: '/lessonOne', status: 'completed' },
-  { title: 'What is a stock?', link: '/lessonOne', status: 'completed' },
+  { title: 'Personal Finance', link: '/lessons/lessonOne', status: 'completed' },
+  { title: 'What is a stock?', link: '/lessons/lessonTwo', status: 'completed' },
   { title: 'Volatility and Diversification', link: '/lessonOne', status: 'locked' },
   { title: 'What is a bond?', link: '/lessonOne', status: 'locked' },
   { title: 'Mutual Funds/ETFs', link: '/lessonOne', status: 'locked' },

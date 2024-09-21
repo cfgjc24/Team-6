@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './lessonOne.css';
-import QuestionBox from '../../components/questionBox';
-import Modal from '../../components/Modal';
+import './lesson.css';
+import QuestionBox from '../../../components/questionBox';
+import Modal from '../../../components/Modal';
 
 const lessonData = {
 
@@ -47,21 +47,11 @@ const LessonOne = () => {
 
   };
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   return (
 
-    <div className="lessonOne">
+    <div className="lesson">
 
-      <header className="lessonOne-header">
+      <header className="lesson-header">
 
         <h1>Lesson {lessonData.lessonId}</h1>
         <h1>{lessonData.title}</h1>
@@ -89,7 +79,7 @@ const LessonOne = () => {
         <a
           href={lessonData.kahoot}
           target="_blank"
-          rel="noopener noreferer"
+          rel="noopener noreferrer"
           className="lesson-link"
         >
           Kahoot
@@ -100,7 +90,7 @@ const LessonOne = () => {
         <a
           href={lessonData.quizlet}
           target="_blank"
-          rel="noopener noreferer"
+          rel="noopener noreferrer"
           className="lesson-link"
         >
           Quizlet
@@ -142,5 +132,5 @@ const LessonOne = () => {
   );
 
 };
-//test
+
 export default LessonOne;
