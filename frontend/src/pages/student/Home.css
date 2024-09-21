@@ -1,53 +1,97 @@
 .home-container {
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: url('../../background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
 }
 
 .intro-text {
-  margin-bottom: 30px;
-  text-align: center;
+  color: black;
+  font-size: 48px;
+  font-weight: bold;
 }
 
 .main-content {
   display: flex;
-  justify-content: space-between;
-}
-
-.left-container,
-.right-container {
-  width: 45%;
+  flex-direction: row;
+  width: 80%;
+  color: black;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .left-container {
-  background-color: #f9f9f9;
+  flex: 1;
   padding: 20px;
-  border-radius: 8px;
 }
 
 .right-container {
-  background-color: #f1f1f1;
+  flex: 2;
   padding: 20px;
-  border-radius: 8px;
-}
-
-.right-container h2 {
-  text-align: center;
 }
 
 .links-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
-.links-list li {
-  margin-bottom: 10px;
+.lesson-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 24px;
 }
 
-.links-list li a {
+.lesson-item .check {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.lesson-item.completed .check {
+  color: green;
+}
+
+.lesson-item.notCompleted .check {
+  color: gray;
+  border: none;
+}
+
+.lesson-item a {
   text-decoration: none;
-  color: #5FA9E6;
-  font-size: 18px;
+  color: #007BFF;
+  font-size: 24px;
 }
 
-.links-list li a:hover {
-  text-decoration: underline;
+.lesson-item a:hover {
+  color: #0056b3;
+}
+
+.home-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url('../../background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+
+.main-content {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 10px;
 }
