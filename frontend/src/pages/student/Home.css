@@ -65,7 +65,7 @@
 }
 
 .lesson-item.notCompleted .check {
-  color: gray;
+  color: black;
 }
 
 .lesson-item a {
