@@ -18,6 +18,41 @@ const AdminView = () => {
 
     };
 
+    const handleExportCSV = async (type) => {
+        try {
+
+            const response = await fetch(`127.0.0.1:5000/api/admin/dump/${type}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/csv',
+                },
+
+            });
+
+            if (response.ok) {
+
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+
+                a.download = `${type}-data.csv`; 
+                document.body.appendChild(a); 
+                a.click(); 
+                a.remove();
+
+            } else {
+
+                console.error('Failed to download the file');
+            }
+
+        } catch (error) {
+
+            console.error('Error downloading the file', error);
+        }
+
+    };
+
     return (
         <div className="admin-view">
             
@@ -83,9 +118,11 @@ const AdminView = () => {
 
             <section className="export-view">
 
-                <h2>Export CSV</h2>
-                <button className="export-btn">Export</button>
-                
+                <h2>Export CSV's</h2>
+                <button className="export-btn" style={{ marginRight: '5px' }}>Export this Page</button>
+                <button className="export-btn">Export Users</button>
+                <button onClick={() => handleExportCSV('lessons')} className="export-btn" style={{ marginLeft: '5px' }}>Export Lessons</button>
+
             </section>
 
         </div>
