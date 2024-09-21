@@ -1,0 +1,69 @@
+/* src/components/AdditionalResources.css */
+.additional-resources {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .ed-link-section {
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  
+  .ed-link-section h2 {
+    font-size: 2rem;
+    color: #3b5998;
+  }
+  
+  .ed-link {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+  }
+  
+  .ed-link:hover {
+    background-color: #45a049;
+  }
+  
+  .helpful-resources {
+    margin-top: 20px;
+  }
+  
+  .helpful-resources h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+  
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .resource-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .resource-card img.thumbnail {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+  
+  .resource-card h3 {
+    font-size: 1.4rem;
+    margin: 10px 0;
+  }
+  
+  .resource-card p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
