@@ -33,7 +33,7 @@ class Lesson(db.Model):
     belonging_level = db.Column(db.Integer, unique=False, nullable=False)
     biggest_challenge = db.Column(db.String(120), unique=False, nullable=False)
     suggestions = db.Column(db.String(120), unique=False, nullable=False)
-    lessons = relationship("Lesson", back_populates="student", cascade="all, delete-orphan")
+    students = relationship('Student', secondary=student_lesson_association, back_populates='lessons')
 
 # Define tutor model for database
 class Tutor(db.Model):
