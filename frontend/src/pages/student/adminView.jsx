@@ -120,7 +120,7 @@ const AdminView = () => {
 
                 <h2>Export CSV's</h2>
                 <button className="export-btn" style={{ marginRight: '5px' }}>Export this Page</button>
-                <button className="export-btn">Export Users</button>
+                <button onClick={() => handleExportCSV('')}className="export-btn">Export Users</button>
                 <button onClick={() => handleExportCSV('lessons')} className="export-btn" style={{ marginLeft: '5px' }}>Export Lessons</button>
 
             </section>
