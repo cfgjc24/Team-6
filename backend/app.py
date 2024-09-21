@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 # import SQLAlchemy
 
 from models import *
+from collections import defaultdict
 
 DB_FILE = "fgi.db"
 
@@ -29,6 +30,18 @@ def login():
 @app.route("/api/register", methods=["POST"])
 def register():
     return jsonify({"Successfully registered!"})
+
+@app.route("/api/admin/confidence", methods=["GET"])
+def get_confidence_levels():
+    confidence_levels = defaultdict(list)
+    confidence_level_per_lesson = defaultdict(int)
+    all_students = Student.query.all()  
+    for student in all_students:
+        for lesson in student.lessons:
+            confidence_levels[lesson.id].append(lesson.confidence_level)
+    for lesson in confidence_levels:
+        confidence_level_per_lesson[lesson.id] = sum(confidence_levels[lesson])/len(confidence_levels[lesson])
+    return jsonify(confidence_level_per_lesson)
 
 
 # Get all students
