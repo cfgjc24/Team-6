@@ -1,12 +1,14 @@
-// src/components/authentication/Login.js
 import React, { useState } from 'react';
-import './Authentication.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,7 +17,10 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // handle login logic here
+  };
+
+  const redirectToRegister = () => {
+    navigate('/register');
   };
 
   return (
@@ -48,6 +53,13 @@ function Login() {
         </div>
         <button type="submit" className="auth-button">Login</button>
       </form>
+
+      <div className="register-section">
+        <p>Don't have an account?</p>
+        <button onClick={redirectToRegister} className="register-button">
+          Register
+        </button>
+      </div>
     </div>
   );
 }
