@@ -71,8 +71,7 @@ def register():
     try:
         db_.session.add(user)
         db_.session.commit()
-        return redirect(f"/api/student/{user.id}")
-        # frontend\src\pages\student\Home.jsx
+        return redirect("/home")
     except Exception as e:
         return jsonify({"error": "Error registering user"}), 400
 
