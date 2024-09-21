@@ -1,45 +1,79 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import ARRAY
-from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy.orm import DeclarativeBase, MappedAsDataclass
 from sqlalchemy.orm import relationship
+from sqlalchemy import MetaData
+
+class Base(DeclarativeBase):
+    pass
+
+db_ = SQLAlchemy(model_class=Base)
 
 # Association Table linking Student and Lesson
-student_lesson_association = db.Table('student_lesson',
-    db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
-    db.Column('lesson_id', db.Integer, db.ForeignKey('lesson.id'), primary_key=True)
+student_lesson_association = db_.Table('student_lesson',
+    db_.Column('student_id', db_.Integer, db_.ForeignKey('student.id'), primary_key=True),
+    db_.Column('lesson_id', db_.Integer, db_.ForeignKey('lesson.id'), primary_key=True)
 )
 
 # Define student model for database
-class Student(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   first_name = db.Column(db.String(50), nullable=False)
-   last_name = db.Column(db.String(50), nullable=False)
-   email = db.Column(db.String(50), unique = True, nullable=False)
-   school = db.Column(db.String(50), nullable=False)
-   password = db.Column(db.String(50), nullable=False)
-   tutor = db.Column(ARRAY(db.String(50)), nullable=False)
-   all_lessons = db.Column(ARRAY(db.String(150)), nullable=False)
-   lessons_completed = db.Column(ARRAY(db.String(50)), nullable=False)
+class Student(db_.Model):
+   id = db_.Column(db_.Integer, primary_key=True)
+   first_name = db_.Column(db_.String(50), nullable=False)
+   last_name = db_.Column(db_.String(50), nullable=False)
+   email = db_.Column(db_.String(50), unique=True, nullable=False)
+   school = db_.Column(db_.String(50), nullable=False)
+   password = db_.Column(db_.String(50), nullable=False)
+   tutor = db_.Column(db_.String(50), nullable=False)
    lessons = relationship('Lesson', secondary=student_lesson_association, back_populates='students')
-    
-class Lesson(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), unique=False, nullable=False)
-    completed = db.Column(db.Boolean, unique=False, nullable=False)
-    questions = db.Column(ARRAY(db.String(120)), unique=False)
-    question_responses = db.Column(ARRAY(db.String(120)), unique=False)
-    confidence_level = db.Column(db.Integer, unique=False, nullable=True)
-    belonging_level = db.Column(db.Integer, unique=False, nullable=True)
-    biggest_challenge = db.Column(db.String(120), unique=False, nullable=True)
-    suggestions = db.Column(db.String(120), unique=False, nullable=True)
-    slide_link = db.Column(db.String(100), unique=True, nullable=False)
-    quizlet_link = db.Column(db.String(100), unique=True, nullable=False)
-    kahoot_link = db.Column(db.String(100), unique=True, nullable=False)
+
+# Define association tables with correct structure
+lesson_question = db_.Table('lesson_question',
+    db_.Column('lesson_id', db_.Integer, db_.ForeignKey('lesson.id')),
+    db_.Column('question_id', db_.Integer, db_.ForeignKey('question.id'))
+)
+
+lesson_question_response = db_.Table('lesson_question_response',
+    db_.Column('lesson_id', db_.Integer, db_.ForeignKey('lesson.id')),
+    db_.Column('question_response_id', db_.Integer, db_.ForeignKey('question_response.id'))
+)
+
+lesson_all_lessons = db_.Table('lesson_all_lessons',
+    db_.Column('lesson_id', db_.Integer, db_.ForeignKey('lesson.id')),
+    db_.Column('all_lessons_id', db_.Integer, db_.ForeignKey('all_lessons.id'))
+)
+
+lesson_completed_lessons = db_.Table('lesson_lessons_completed', 
+    db_.Column('lesson_id', db_.Integer, db_.ForeignKey('completed_lessons.id'))
+)
+
+class Lesson(db_.Model):
+    id = db_.Column(db_.Integer, primary_key=True)
+    title = db_.Column(db_.String(120), unique=False, nullable=False)
+    completed = db_.Column(db_.Boolean, unique=False, nullable=False)
+    confidence_level = db_.Column(db_.Integer, unique=False, nullable=True)
+    belonging_level = db_.Column(db_.Integer, unique=False, nullable=True)
+    biggest_challenge = db_.Column(db_.String(120), unique=False, nullable=True)
+    suggestions = db_.Column(db_.String(120), unique=False, nullable=True)
+    slide_link = db_.Column(db_.String(100), unique=True, nullable=False)
+    quizlet_link = db_.Column(db_.String(100), unique=True, nullable=False)
+    kahoot_link = db_.Column(db_.String(100), unique=True, nullable=False)
     students = relationship('Student', secondary=student_lesson_association, back_populates='lessons')
 
+class Question(db_.Model):
+    id = db_.Column(db_.Integer, primary_key=True)
+
+class QuestionResponse(db_.Model):
+    id = db_.Column(db_.Integer, primary_key=True)
+
+class AllLessons(db_.Model):
+    id = db_.Column(db_.Integer, primary_key=True)
+
+class CompletedLessons(db_.Model):
+    id = db_.Column(db_.Integer, primary_key=True)
+
 # Define tutor model for database
-class Tutor(db.Model):
-   id = db.Column(db.Integer, primary_key=True)
-   first_name = db.Column(db.String(50), primary_key=True)
-   last_name = db.Column(db.String(50), nullable=False)
-   email = db.Column(db.String(50), unique = True, nullable=False)
+class Tutor(db_.Model):
+   id = db_.Column(db_.Integer, primary_key=True)
+   first_name = db_.Column(db_.String(50), nullable=False)
+   last_name = db_.Column(db_.String(50), nullable=False)
+   email = db_.Column(db_.String(50), unique=True, nullable=False)

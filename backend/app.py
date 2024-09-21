@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-
 from models import *
 
-DB_FILE = "fgi.db"
+db_FILE = "fgi.db"
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+from models import db_
+db_.init_app(app)
 
 # Welcome user to First Generation Investors
 @app.route("/")
@@ -75,8 +74,8 @@ def update_student(id):
 @app.route('/api/users/students/<id>', methods=['DELETE'])
 def delete_student(id):
     student = Student.query.filter_by(id=id).first_or_404()
-    db.session.delete(id)
-    db.session.commit()
+    db_.session.delete(id)
+    db_.session.commit()
     deleted_data = ({"first_name": student.first_name, "last_name": student.last_name, "email": 
                      student.email, "school": student.school,})
     return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
@@ -102,13 +101,13 @@ def retrieve_data(id):
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
-        db.session.add(this_lesson)
-        db.session.commit()
+        db_.session.add(this_lesson)
+        db_.session.commit()
     except:
         return "Error"
     return "No Error"
 
 if __name__ == "__main__":
     with app.app_context():
-        db.create_all()
+        db_.create_all()
     app.run()
