@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './NavBar.css';
@@ -12,9 +12,10 @@ function NavBar() {
             First Generation Investor
           </Link>
         </div>
+
         <ul className="navbar-nav">
           <li className="nav-item">
-            <Link to="/" className="nav-link">Home</Link>
+            <Link to="/pages/student/home" className="nav-link">Home</Link>
           </li>
           <li className="nav-item">
             <Link to="/additional" className="nav-link">Additional Resources</Link>
@@ -26,6 +27,7 @@ function NavBar() {
             <Link to="/logout" className="nav-link">Logout</Link>
           </li>
         </ul>
+
       </div>
     </nav>
   );

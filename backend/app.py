@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from models import *
 
-DB_FILE = "studenttutor.db"
+DB_FILE = "fgi.db"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"

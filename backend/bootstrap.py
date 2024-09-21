@@ -3,7 +3,7 @@ import json
 
 from app import app, db, DB_FILE
 from models import *
-from flask_sqlalchemy import SQLAlchemy
+# import SQLAlchemy
 
 # Create a student named 'cole' with required fields
 def create_student():
