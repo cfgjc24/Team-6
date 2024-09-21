@@ -6,12 +6,20 @@
         "email": "janesmith@gmail.com",
         "school": "University of Washingston",
         "password": "12345678",
-        "tutor": ["John Doe"],
-        "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-            "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-            "Personal Finance II"],
-        "lessons_completed": ["Personal Finance", "What is a stock"],
-        "lessons": []
+        "tutor": "John Doe",
+        "lessons": [
+            {
+                "title": "Personal Finance",
+                "completed": false,
+                "confidence_level": null,
+                "belonging_level": null,
+                "biggest_challenge": null,
+                "suggestions": null,
+                "slide_link": "https://www.canva.com/design/DAEqdhQurq8/YZFuXmX70XK7WZWIpLaEEg/edit",
+                "kahoot_link": "https://create.kahoot.it/share/check-lesson-1/4a6ebec8-5cd2-479a-93cd-2121af5a76ba",
+                "quizlet_link": "https://quizlet.com/614499290/lesson-1-personal-finance-flash-cards/?x=1jqt"
+            }
+        ]
     },
         {
             "id": "2",
@@ -20,11 +28,7 @@
             "email": "michaelj@upenn.edu",
             "school": "University of Pennsylvania",
             "password": "abcdef12",
-            "tutor": ["Sarah Lee"],
-            "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-                "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-                "Personal Finance II"],
-            "lessons_completed": ["Personal Finance"],
+            "tutor": "Sarah Lee",
             "lessons": []
         },
         {
@@ -34,11 +38,7 @@
             "email": "emilyw@nyu.edu",
             "school": "New York University",
             "password": "pass1234",
-            "tutor": ["Adam Brown"],
-            "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-                "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-                "Personal Finance II"],
-            "lessons_completed": ["Personal Finance", "What is a stock", "Volatility and diversification"],
+            "tutor": "Adam Brown",
             "lessons": []
         },
         {
@@ -48,11 +48,7 @@
             "email": "chrisd@mit.edu",
             "school": "Massachusetts Institute of Technology",
             "password": "password123",
-            "tutor": ["Cathy Johnson"],
-            "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-                "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-                "Personal Finance II"],
-            "lessons_completed": ["Personal Finance", "What is a stock", "What is a bond"],
+            "tutor": "Cathy Johnson",
             "lessons": []
         },
         {
@@ -62,11 +58,7 @@
             "email": "sophiam@harvard.edu",
             "school": "Harvard University",
             "password": "harvard789",
-            "tutor": ["Emily Clark", "Jane Kim"],
-            "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-                "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-                "Personal Finance II"],
-            "lessons_completed": ["Personal Finance", "What is a stock"],
+            "tutor": "Emily Clark",
             "lessons": []
         },
         {
@@ -76,11 +68,7 @@
             "email": "danielg@georgiatech.edu",
             "school": "Georgia Tech",
             "password": "georgia456",
-            "tutor": ["Olivia Brown"],
-            "all_lessons": ["Personal Finance", "What is a stock", "Volatility and diversification", 
-                "What is a bond", "Mutual Funds/ETFs", "Compound Interest and Dollar-Cost Averaging", 
-                "Personal Finance II"],
-            "lessons_completed": ["Personal Finance", "Volatility and diversification", "What is a bond"],
+            "tutor": "Olivia Brown",
             "lessons": []
         }
     ]
