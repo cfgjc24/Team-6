@@ -38,7 +38,7 @@ def login():
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-
+    return jsonify({"Successfully registered!"})
 
 @app.route("/student/<student_id>/retrieve_data", methods=["POST"])
 def retrieve_data(student_id):
