@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './NavBar.css';
 import Logo from '../../Logo.png';
 
 function NavBar() {
+  const navigate = useNavigate();
+  const handleLogout = (e) => {
+    e.preventDefault();
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar">
       <div className="container navbar-content">
@@ -25,7 +31,9 @@ function NavBar() {
             <Link to="/faq" className="nav-link">FAQ</Link>
           </li>
           <li className="nav-item">
-            <Link to="/logout" className="nav-link">Logout</Link>
+            <Link to="/logout" className="nav-link" onClick={handleLogout}>
+              Logout
+            </Link>
           </li>
         </ul>
 
