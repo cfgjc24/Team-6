@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 function Login() {
@@ -7,6 +8,8 @@ function Login() {
     password: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -14,7 +17,10 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // handle login logic here
+  };
+
+  const redirectToRegister = () => {
+    navigate('/register');
   };
 
   return (
@@ -47,6 +53,13 @@ function Login() {
         </div>
         <button type="submit" className="auth-button">Login</button>
       </form>
+
+      <div className="register-section">
+        <p>Don't have an account?</p>
+        <button onClick={redirectToRegister} className="register-button">
+          Register
+        </button>
+      </div>
     </div>
   );
 }
