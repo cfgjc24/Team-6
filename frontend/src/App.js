@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
 import NavBar from './components/NavBar/NavBar';
-import AdditionalResources from './pages/student/AdditionalResources'; 
+import StudentHome from './pages/student/Home';
+import AdditionalResources from './pages/student/AdditionalResources';
 import Registration from './components/Authentication/Registration';
 import Login from './components/Authentication/Login';
 
@@ -11,6 +13,7 @@ function App() {
       <NavBar />
       <Routes>
         {/* Route for the Additional Resources page */}
+        <Route path="/home" element={<StudentHome />} />
         <Route path="/additional" element={<AdditionalResources />} />
         <Route path="/register" element={<Registration />} /> {/* Add the registration route */}
         <Route path="/login" element={<Login />} />
