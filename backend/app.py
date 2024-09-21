@@ -152,9 +152,13 @@ def dump_lesson_data():
 # Get user profile
 @app.route("/api/student/<int:id>", methods=["GET"])
 def get_user(id):
-    user = user.error_or_404(id)
+    user = Student.query.get(id)
+    if user is None:
+        # TODO return 404
+        return jsonify({"error": "User not found"})
+    # user = user.error_or_404(id)
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
+                 "tutor": user.tutor}
     return jsonify(user_info)
 
 # Modify a student
