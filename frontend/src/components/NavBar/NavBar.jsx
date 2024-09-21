@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './NavBar.css';
+import Logo from '../../Logo.png';
 
 function NavBar() {
   return (
@@ -9,16 +10,20 @@ function NavBar() {
       <div className="container navbar-content">
         <div className="navbar-brand">
           <Link to="/" className="brand">
-            First Generation Investor
+            <img src={Logo} alt="First Generation Investor" className="logo" />
           </Link>
         </div>
 
         <ul className="navbar-nav">
           <li className="nav-item">
+
+            <Link to="/home" className="nav-link">Home</Link>
+
             <Link to="/pages/student/home" className="nav-link">Home</Link>
+
           </li>
           <li className="nav-item">
-            <Link to="/additional" className="nav-link">Additional Resources</Link>
+            <Link to="/additionalresources" className="nav-link">Additional Resources</Link>
           </li>
           <li className="nav-item">
             <Link to="/faq" className="nav-link">FAQ</Link>

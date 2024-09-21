@@ -6,7 +6,7 @@ Back-end: Python, Flask
 
 ## Running locally
 
-In a terminal, run the below commands to run the backend.
+Running the app:
 
 ```bash
 cd backend
@@ -16,10 +16,15 @@ pip install -r requirements.txt
 python3 app.py
 ```
 
-In a separate terminal, run the below commands to run the frontend. Your browser should open up automatically.
+In a separate terminal:
 
 ```bash
 cd frontend
 npm install
 npm start
 ```
+=======
+## Our tech stack:
+- Flask
+- Python
+- React
