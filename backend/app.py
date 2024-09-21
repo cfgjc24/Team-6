@@ -153,10 +153,9 @@ def dump_lesson_data():
 @app.route("/api/student/<int:id>", methods=["GET"])
 def get_user(id):
     user = Student.query.get(id)
-    if user is None:
-        # TODO return 404
-        return jsonify({"error": "User not found"})
-    # user = user.error_or_404(id)
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
                  "tutor": user.tutor}
     return jsonify(user_info)
