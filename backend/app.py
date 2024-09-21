@@ -51,10 +51,10 @@ def login():
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    password = request.form.get('password')
-    user_type = request.form.get('user_type')
-    first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
-    school = request.form.get('school')
+    password = request.json.get('password')
+    user_type = request.json.get('user_type')
+    first_name, last_name, email = request.json.get('first_name'), request.json.get('last_name'), request.json.get('email')
+    school = request.json.get('school')
     tutor = "Generic Finance Coach"
 
     user = None
@@ -72,6 +72,7 @@ def register():
         db_.session.add(user)
         db_.session.commit()
         return redirect(f"/api/student/{user.id}")
+        # frontend\src\pages\student\Home.jsx
     except Exception as e:
         return jsonify({"error": "Error registering user"}), 400
 
@@ -155,8 +156,9 @@ def get_user(id):
     if not user:
         return jsonify({"error": "User not found"}), 404
 
+    lessons = [lessons.title for lessons in user.lessons]
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor}
+                 "tutor": user.tutor, "lessons": lessons}
     return jsonify(user_info)
 
 # Modify a student
@@ -214,9 +216,6 @@ def store_lesson_data(id, lesson_id):
             question_responses.append(QuestionResponse(response=response))
     lesson.question_responses = question_responses
 
-    completed = False
-    if len(question_responses) == len(lesson.questions):
-        lesson.completed = True
 
     #questions_answered = 0
     #for response in lesson.question_responses:
@@ -230,6 +229,7 @@ def store_lesson_data(id, lesson_id):
     lesson.belonging_level = request.json["belonging_level"]
     lesson.biggest_challenge = request.json["biggest_challenge"]
     lesson.suggestions = request.json["suggestions"]
+    lesson.completed = True
     
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
@@ -253,6 +253,45 @@ def get_lesson(lesson_id):
         "questions": questions
     }
     return lesson_info
+
+@app.route("/api/student/<int:id>/<int:lesson_id>/get_survey", methods=["GET"])
+def get_survey(id, lesson_id):
+    student = Student.query.get(id)
+    if not student:
+        return jsonify({"message": "Student not found!"}), 404
+    lesson = None
+    for this_lesson in student.lessons:
+        if this_lesson.id == lesson_id:
+            lesson = this_lesson
+    if not lesson:
+        return jsonify({"error": "Lesson not found"}), 404
+    question_responses = [response for response in lesson.question_responses]
+    survey_data = ({"confidence_level": lesson.confidence_level, "belonging_level": lesson.belonging_level, "biggest_challenge": lesson.biggest_challenge, "suggestions": lesson.suggestions, "completed": lesson.completed})
+    return jsonify(survey_data)
+
+@app.route("/api/admin/get_all")
+def get_all():
+    all_data = []
+    students = Student.query.all() 
+
+    for student in students:
+        for lesson in student.lessons:
+            lesson_data = {
+                    "first_name": student.first_name,
+                    "last_name": student.last_name,
+                    "email": student.email,
+                    "school": student.school,
+                    "tutor": student.tutor,
+                    "lesson_title": lesson.title,
+                    "completed": lesson.completed,
+                    "confidence_level": lesson.confidence_level,
+                    "belonging_level": lesson.belonging_level,
+                    "biggest_challenge": lesson.biggest_challenge,
+                    "suggestions": lesson.suggestions
+            }
+        all_data.append(lesson_data)
+
+    return jsonify(all_data)
 
 # Retrieve data from student
 @app.route("/api/student/<int:id>/retrieve_data", methods=["PUT"])

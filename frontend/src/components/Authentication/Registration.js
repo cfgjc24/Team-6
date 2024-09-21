@@ -33,6 +33,7 @@ function Registration() {
       setError('Passwords do not match');
       return;
     }
+    console.log("formData",formData);
 
     try {
       const response = await fetch('/api/register', {
@@ -47,7 +48,9 @@ function Registration() {
           password: formData.password,
           school: formData.school,
           tutor: formData.tutor,
-          user_type: formData.userType,
+          user_type: formData.user_type
+
+          
         }),
       });
 
@@ -169,9 +172,9 @@ function Registration() {
             required
           >
             <option value="">Select type</option>
-            <option value="student">student</option>
-            <option value="admin">admin</option>
-            <option value="tutor">tutor</option>
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+            <option value="tutor">Tutor</option>
           </select>
         </div>
         <button type="submit" className="auth-button">
