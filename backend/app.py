@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify, redirect, send_file
 from models import *
 from collections import defaultdict
+import tempfile
 
 db_FILE = "fgi.db"
 
@@ -122,7 +123,7 @@ def get_students():
     student_list = []
     for student in students:
         student_list.append({"first_name": student.first_name, "last_name": student.last_name, "email": student.email, "school": student.school, 
-                             "tutor": student.tutor, "all_lessons": student.all_lessons, "lessons_completed": student.lessons_completed})
+                             "tutor": student.tutor})
     return jsonify(student_list)
 
 # dump all data
@@ -130,9 +131,9 @@ def get_students():
 def dump_data():
     dumpfile = tempfile.NamedTemporaryFile()
     with open(dumpfile.name, "w") as f:
-        f.write("id,first_name,last_name,email,school,password,tutor_count,lessons_completed_count\n")
+        f.write("id,first_name,last_name,email,school,password,tutor\n")
         for student in Student.query.all():
-            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{len(student.tutor)},{len(student.lessons_completed)}\n")
+            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{student.tutor}\n")
     return send_file(dumpfile.name)
 
 # Get a CSV with lessons data
@@ -170,15 +171,16 @@ def update_student(id):
     student.email = data.get('email', student.email)
     student.school = data.get('school', student.school)
     student.tutor = data.get('tutor', student.tutor)
-    student.all_lessons = data.get('all_lessons', student.all_lessons)
-    student.lessons_completed = data.get('lessons_completed', student.lessons_completed)
+    # student.all_lessons = data.get('all_lessons', student.all_lessons)
+    # student.lessons_completed = data.get('lessons_completed', student.lessons_completed)
     new_details = ({"name": student.name,
         "description": student.description,
         "email": student.email,
         "school": student.school,
         "tutor": student.tutor,
-        "all_lessons": student.all_lessons,
-        "lessons_completed": student.lessons_completed})
+        # "all_lessons": student.all_lessons,
+        # "lessons_completed": student.lessons_completed
+        })
     return jsonify({'Student modified.'}, new_details), 200
 
 # Delete a student
@@ -221,7 +223,7 @@ def store_lesson_data(id, lesson_id):
     lesson.biggest_challenge = request.json.get("biggest_challenge", lesson.biggest_challenge)
     lesson.suggestions = request.json.get("suggestions", lesson.suggestions)
     
-    db.session.commit()
+    db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
 
 # Retrieve data from student
