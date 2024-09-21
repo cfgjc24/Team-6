@@ -1,20 +1,73 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
-DB_FILE = "clubreview.db"
+from models import *
+
+DB_FILE = "studenttutor.db"
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-from models import *
 
-app.route("/")
+
+# Welcome user to First Generation Investors
+@app.route("/")
 def main():
     return "Welcome to First Generation Investors!"
 
-app.route("/api", methods=["GET"])
+# Welcome user to API with message
+@app.route("/api/", methods=["GET"])
+def api():
+    return jsonify({"message": "Welcome to the API!"})
+
+# Get user profile
+@app.route("/api/users/<id>", methods=["GET"])
+def get_user(id):
+    user = user.error_or_404(id)
+    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
+                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
+    return jsonify(user_info)
+
+# Login API endpoint
+@app.route("/api/login", methods=["PUT"])
+def login():
+   return jsonify({"Successfully logged in!"})
+
+# Registration API endpoint
+@app.route("/api/register", methods=["POST"])
+def register():
+    return jsonify({"Successfully registered!"})
+
+@app.route("/student/<student_id>/retrieve_data", methods=["POST"])
+def retrieve_data(student_id):
+    question_responses = []
+    for response in request.json.get("questions"):
+        if response:
+            question_responses.append(response)
+
+    completed = False
+    if len(question_responses) == len(request.json.get("questions")):
+        completed = True
+    
+    confidence_level = request.json.get("confidence_level")
+    belonging_level = request.json.get("confidence_level")
+    biggest_challenge = request.json.get("confidence_level")
+    suggestions = request.json.get("confidence_level")
+
+    this_lesson = Lesson(student_id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+                         belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
+
+    try:
+        db.session.add(this_lesson)
+        db.session.commit()
+    except:
+        return "Error"
+    
+    return "No Error"
+
+
 
 if __name__ == "__main__":
     with app.app_context():
