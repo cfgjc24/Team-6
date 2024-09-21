@@ -7,19 +7,7 @@
         "school": "University of Washingston",
         "password": "12345678",
         "tutor": "John Doe",
-        "lessons": [
-            {
-                "title": "Personal Finance",
-                "completed": false,
-                "confidence_level": null,
-                "belonging_level": null,
-                "biggest_challenge": null,
-                "suggestions": null,
-                "slide_link": "https://www.canva.com/design/DAEqdhQurq8/YZFuXmX70XK7WZWIpLaEEg/edit",
-                "kahoot_link": "https://create.kahoot.it/share/check-lesson-1/4a6ebec8-5cd2-479a-93cd-2121af5a76ba",
-                "quizlet_link": "https://quizlet.com/614499290/lesson-1-personal-finance-flash-cards/?x=1jqt"
-            }
-        ]
+        "lessons": []
     },
         {
             "id": "2",

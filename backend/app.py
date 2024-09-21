@@ -222,18 +222,24 @@ def store_lesson_data(id, lesson_id):
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
 
-# Get lesson data for a certain student
+# Get lesson data for a certain student, lesson_id here isn't the actual lesson_id, but rather, the index of the lesson in the student.lessons
 @app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
 def get_lesson(id, lesson_id):
     lessons = Student.query.get(id).lessons
-    min_lesson_id = lessons[0].id
-    max_lesson_id = lessons[-1].id
-    lesson = lessons[lesson_id - min_lesson_id]
+    lesson = lessons[lesson_id]
     if not lesson:
         return jsonify({"error": "User not found"}), 404
 
-    lesson_info = {"title": lesson.title, "quizlet_link": lesson.quizlet_link}
-    return jsonify(lesson_info)
+    questions = [question.question for question in lesson.questions]
+
+    lesson_info = {
+        "title": lesson.title,
+        "quizlet_link": lesson.quizlet_link,
+        "slide_link": lesson.slide_link,
+        "kahoot_link": lesson.kahoot_link,
+        "questions": questions
+    }
+    return lesson_info
 
 # Retrieve data from student
 @app.route("/api/student/<int:id>/retrieve_data", methods=["POST"])
