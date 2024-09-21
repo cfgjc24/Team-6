@@ -15,6 +15,7 @@ class Student(db.Model):
 
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), unique=False, nullable=False)
     student_id = db.Column(db.Integer, unique=True, nullable=False)
     completed = db.Column(db.Boolean, unique=False, nullable=False)
     questions = db.Column(ARRAY(db.String(120)), unique=False)

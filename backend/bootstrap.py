@@ -17,3 +17,16 @@ def create_student():
     db.session.add(user)
     db.session.commit()
     print("Student created.")
+
+# Load students.json to the database
+def load_data():
+    with open('students.json') as file:
+        data = json.load(file)
+        for student in data:
+            user = Student(id=student['id'], first_name=student['first_name'], last_name=student['last_name'],
+                email=student['email'], school=student['school'], password=student['password'], 
+                tutor=student['tutor'], all_lessons=student['all_lessons'], 
+                lessons_completed=student['lessons_completed'])
+            db.session.add(user)
+        db.session.commit()
+        print("Data loaded.")
