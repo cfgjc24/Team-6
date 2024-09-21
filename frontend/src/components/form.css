@@ -1,0 +1,80 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+survey-title {
+    font-size: 2em;
+    margin: 0px;
+    color: #5FA9E6;
+    text-align: 60%;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+select,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+textarea {
+    max-width: 95%;
+    min-width: 95%;
+    height: 100px; 
+    min-height: 100px;
+    max-height: 100px; 
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #5FA9E6;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #5FA9E6;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #5FA9E6;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
