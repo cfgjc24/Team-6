@@ -30,3 +30,14 @@ def load_data():
             db.session.add(user)
         db.session.commit()
         print("Data loaded.")
+
+if __name__ == "__main__":
+    # Delete existing database before bootstrapping a new one
+    LOCAL_DB_FILE = "instance/" + DB_FILE
+    if os.path.exists(LOCAL_DB_FILE):
+        os.remove(LOCAL_DB_FILE)
+
+    with app.app_context():
+        db.create_all()
+        create_student()
+        load_data()
