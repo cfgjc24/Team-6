@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './lessonOne.css';
-import QuestionBox from './components/questionBox';
-import Modal from './components/Modal';
+import QuestionBox from '../../components/questionBox';
+import Modal from '../../components/Modal';
 
 const lessonData = {
 
