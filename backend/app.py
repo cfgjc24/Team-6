@@ -80,8 +80,8 @@ def delete_student(id):
     return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
 
 # Retrieve data from student
-@app.route("/api/student/<student_id>/retrieve_data", methods=["POST"])
-def retrieve_data(student_id):
+@app.route("/api/users/student/<id>/retrieve_data", methods=["POST"])
+def retrieve_data(id):
     question_responses = []
     for response in request.json.get("questions"):
         if response:
@@ -96,7 +96,7 @@ def retrieve_data(student_id):
     biggest_challenge = request.json.get("confidence_level")
     suggestions = request.json.get("confidence_level")
 
-    this_lesson = Lesson(student_id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+    this_lesson = Lesson(student_id=id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
