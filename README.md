@@ -20,24 +20,22 @@
     The Student table and the Lesson table are connected with an association table so that a student can have many lessons and a lesson can have many students. It represents a many-to-many relationship. The association table is above the Student table so it can be used a secondary in the Student table. The back reference in the Student table serves as a pseudo column that gets created on the Lesson table to allow the backend team to see all of the lessons for a certain student. Similar association tables were created to connect lessons and questions, lessons and question responses, and lesson and lessons completed.
 
 **Admin Routes <br/>**
-1. /api/login
-2. /api/register
-3. /api/admin/confidence
-4. /api/admin/confidence/<int:lesson_id>
-5. /api/admin/belonging
-6. /api/admin/students
-7. /api/admin/dump
-8. /api/admin/dump/lesson
+1. /api/login, POST
+2. /api/register, POST
+3. /api/admin/confidence, GET
+4. /api/admin/confidence/<int:lesson_id>, GET
+5. /api/admin/belonging, GET
+6. /api/admin/students, GET
+7. /api/admin/dump, GET
+8. /api/admin/dump/lesson, GET
 
 **Student Routes <br/>**
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
-7. 
-8. 
+1. /api/student/<int:id>, GET
+2. /api/student/<int:id>, PUT
+3. /api/student/<int:id>, DELETE
+4. /api/student/<int:id>/<int:lesson_id>/store_lesson_data, PATCH
+5. /api/student/<int:id>/<int:lesson_id>, GET
+6. /api/student/<int:id>/retrieve_data, POST
 
 ### Running Locally
 
