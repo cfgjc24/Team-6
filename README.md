@@ -23,8 +23,10 @@ cd frontend
 npm install
 npm start
 ```
-
-### Team Members
+## Our tech stack:
+- Flask
+- Python
+- React
 
 *(insert contributions here)*
 
