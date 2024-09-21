@@ -22,14 +22,6 @@ def main():
 def api():
     return jsonify({"message": "Welcome to the API!"})
 
-# Get user profile
-@app.route("/api/users/<id>", methods=["GET"])
-def get_user(id):
-    user = user.error_or_404(id)
-    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
-    return jsonify(user_info)
-
 # Login API endpoint
 @app.route("/api/login", methods=["PUT"])
 def login():
@@ -40,7 +32,48 @@ def login():
 def register():
     return jsonify({"Successfully registered!"})
 
-@app.route("/student/<student_id>/retrieve_data", methods=["POST"])
+# Get user profile
+@app.route("/api/users/<id>", methods=["GET"])
+def get_user(id):
+    user = user.error_or_404(id)
+    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
+                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
+    return jsonify(user_info)
+
+# Modify a student
+@app.route('/api/users/students/<id>', methods=['PUT'])
+def update_student(id):
+    data = request.get_json()
+    student = Student.query.filter_by(name=name).first_or_404()
+    student.name = data.get('name', student.name)
+    student.description = data.get('description', student.description)
+    student.email = data.get('email', student.email)
+    student.school = data.get('school', student.school)
+    student.password = data.get('password', student.password)
+    student.tutor = data.get('tutor', student.tutor)
+    student.all_lessons = data.get('all_lessons', student.all_lessons)
+    student.lessons_completed = data.get('lessons_completed', student.lessons_completed)
+    new_details = ({"name": student.name,
+        "description": student.description,
+        "email": student.email,
+        "school": student.school,
+        "password": student.password,
+        "tutor": student.tutor,
+        "all_lessons": student.all_lessons,
+        "lessons_completed": student.lessons_completed})
+    return jsonify({'Student modified.'}, new_details), 200
+
+# Delete a student
+@app.route('/api/users/students/<id>', methods=['DELETE'])
+def delete_club(id):
+    student = Student.query.filter_by(id=id).first_or_404()
+    db.session.delete(id)
+    db.session.commit()
+    deleted_data = ({"first_name": student.first_name,})
+    return jsonify({'message': 'Club deleted. Sorry to see you go.'}, deleted_data)
+
+# Retrieve data from student
+@app.route("/api/student/<student_id>/retrieve_data", methods=["POST"])
 def retrieve_data(student_id):
     question_responses = []
     for response in request.json.get("questions"):
