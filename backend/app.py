@@ -288,7 +288,7 @@ def get_all():
                     "biggest_challenge": lesson.biggest_challenge,
                     "suggestions": lesson.suggestions
             }
-        all_data.append(lesson_data)
+            all_data.append(lesson_data)
 
     return jsonify(all_data)
 
