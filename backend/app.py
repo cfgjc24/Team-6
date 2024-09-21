@@ -49,7 +49,6 @@ def update_student(id):
     student.description = data.get('description', student.description)
     student.email = data.get('email', student.email)
     student.school = data.get('school', student.school)
-    student.password = data.get('password', student.password)
     student.tutor = data.get('tutor', student.tutor)
     student.all_lessons = data.get('all_lessons', student.all_lessons)
     student.lessons_completed = data.get('lessons_completed', student.lessons_completed)
@@ -57,7 +56,6 @@ def update_student(id):
         "description": student.description,
         "email": student.email,
         "school": student.school,
-        "password": student.password,
         "tutor": student.tutor,
         "all_lessons": student.all_lessons,
         "lessons_completed": student.lessons_completed})
@@ -65,12 +63,13 @@ def update_student(id):
 
 # Delete a student
 @app.route('/api/users/students/<id>', methods=['DELETE'])
-def delete_club(id):
+def delete_student(id):
     student = Student.query.filter_by(id=id).first_or_404()
     db.session.delete(id)
     db.session.commit()
-    deleted_data = ({"first_name": student.first_name,})
-    return jsonify({'message': 'Club deleted. Sorry to see you go.'}, deleted_data)
+    deleted_data = ({"first_name": student.first_name, "last_name": student.last_name, "email": 
+                     student.email, "school": student.school,})
+    return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
 
 # Retrieve data from student
 @app.route("/api/student/<student_id>/retrieve_data", methods=["POST"])
