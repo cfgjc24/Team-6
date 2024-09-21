@@ -68,6 +68,7 @@ def register():
     except:
         return jsonify({"error": "Error registering user"})
 
+
 # Get all students
 @app.route("/api/users/students", methods=["GET"])
 def get_students():
