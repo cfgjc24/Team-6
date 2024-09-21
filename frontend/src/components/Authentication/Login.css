@@ -64,6 +64,24 @@
   background-color: #0056b3;
 }
 
+.register-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-button {
+  background-color: #5FA9E6;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.register-button:hover {
+  background-color: #0056b3;
+}
+
 @media (max-width: 600px) {
   .auth-container {
     padding: 1rem;

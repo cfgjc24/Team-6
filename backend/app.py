@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify, redirect, send_file
+from flask_cors import CORS, cross_origin
 from models import *
 from collections import defaultdict
 import tempfile
@@ -6,8 +7,10 @@ import tempfile
 db_FILE = "fgi.db"
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{db_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['CORS_HEADERS'] = 'Content-Type'
 from models import db_
 db_.init_app(app)
 
@@ -129,7 +132,7 @@ def dump_data():
         f.write("id,first_name,last_name,email,school,password,tutor\n")
         for student in Student.query.all():
             f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{student.tutor}\n")
-    return send_file(dumpfile.name)
+    return send_file(dumpfile.name, as_attachment=True, mimetype="text/csv")
 
 # Get a CSV with lessons data
 @app.route("/api/admin/dump/lesson", methods=["GET"])
@@ -140,7 +143,7 @@ def dump_lesson_data():
         for student in Student.query.all():
             for lesson in student.lessons:
                 f.write(f"{lesson.id},{lesson.title},{student.first_name},{student.last_name},{student.id},{lesson.question_responses},{lesson.confidence_level},{lesson.belonging_level},{lesson.biggest_challenge},{lesson.suggestions}\n")
-    return send_file(dumpfile.name)
+    return send_file(dumpfile.name, as_attachment=True, mimetype="text/csv")
 
 
 

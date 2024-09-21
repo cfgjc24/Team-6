@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Registration.css';
 
 function Registration() {
@@ -15,6 +16,8 @@ function Registration() {
 
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -62,6 +65,10 @@ function Registration() {
     } catch (error) {
       setError('An error occurred during registration.');
     }
+  };
+
+  const redirectToLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -173,6 +180,14 @@ function Registration() {
           Register
         </button>
       </form>
+
+      <div className="redirect-login">
+        <p>Already have an account?</p>
+        <button onClick={redirectToLogin} className="login-button">
+          Login
+        </button>
+      </div>
+
     </div>
   );
 }
