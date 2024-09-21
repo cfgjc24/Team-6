@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify
-# import SQLAlchemy
+from flask import Flask, request, jsonify, redirect, send_file
+from flask_sqlalchemy import SQLAlchemy
+import tempfile
 
 from models import *
 from collections import defaultdict
@@ -22,14 +23,52 @@ def api():
     return jsonify({"message": "Welcome to the API!"})
 
 # Login API endpoint
-@app.route("/api/login", methods=["PUT"])
+@app.route("/api/login", methods=["POST"])
 def login():
-   return jsonify({"Successfully logged in!"})
+    # TODO - resolve these three fields in the frontend
+    user_id, user_password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    user = None
+    if user_type == "student":
+        user = Student.query.get(user_id)
+    elif user_type == "tutor":
+        user = Tutor.query.get(user_id)
+    elif user_type == "admin":
+        # user = Admin.query.get(user_id)
+        # TODO - implement admin model
+        return redirect("/api/admin")
+    else:
+        return jsonify({"error": "Invalid user type"})
+    if user is None or user.password != user_password:
+        return jsonify({"error": "Invalid username or password"})
+    return redirect(f'/api/users/{user_type}/{user_id}')
 
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    return jsonify({"Successfully registered!"})
+    # TODO - resolve these three fields in the frontend
+    user_id, password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
+    school = request.form.get('school')
+    tutor = ["Generic Finance Coach"] # TODO - resolve this field
+    all_lessons = [] # TODO - resolve this field
+    lessons_completed = [] # TODO - resolve this field
+    
+    user = None
+    if user_type == "student":
+        if Student.query.get(user_id) is not None:
+            return jsonify({"error": "User already exists"})
+        user = Student(id=user_id, first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=[], all_lessons=all_lessons, lessons_completed=lessons_completed)
+    elif user_type == "tutor":
+        if Tutor.query.get(user_id) is not None:
+            return jsonify({"error": "User already exists"})
+        user = Tutor(id=user_id, first_name=first_name, last_name=last_name, email=email)
+    
+    try:
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/api/login")
+    except:
+        return jsonify({"error": "Error registering user"})
 
 # Get average confidence levels for each lesson
 @app.route("/api/admin/confidence", methods=["GET"])
@@ -54,7 +93,7 @@ def get_lesson_confidence_level(lesson_id):
 
 # Get average belonging levels for each lesson
 @app.route("/api/admin/belonging", methods=["GET"])
-def get_confidence_levels():
+def get_belonging_levels():
     belonging_levels = defaultdict(list)
     belonging_level_per_lesson = defaultdict(int)
     all_students = Student.query.all()  
@@ -142,6 +181,16 @@ def retrieve_data(id):
         return "Error"
     
     return "No Error"
+
+# dump all data
+@app.route("/api/dump", methods=["GET"])
+def dump_data():
+    dumpfile = tempfile.NamedTemporaryFile()
+    with open(dumpfile.name, "w") as f:
+        f.write("id,first_name,last_name,email,school,password,tutor_count,lessons_completed_count\n")
+        for student in Student.query.all():
+            f.write(f"{student.id},{student.first_name},{student.last_name},{student.email},{student.school},{student.password},{len(student.tutor)},{len(student.lessons_completed)}\n")
+    return send_file(dumpfile.name)
 
 if __name__ == "__main__":
     with app.app_context():
