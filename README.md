@@ -1,5 +1,4 @@
 # Team-6
 
-Our tech stack:
-Front-end: React
-Back-end: Python, Flask
+## Our tech stack:
+![Flask]([http://url/to/img.png](https://blog.appseed.us/content/images/2023/10/cover-flask.jpg))
