@@ -85,7 +85,7 @@ def get_confidence_levels():
         for lesson in student.lessons:
             confidence_levels[lesson.id].append(lesson.confidence_level)
     for lesson in confidence_levels:
-        confidence_level_per_lesson[lesson.id] = sum(confidence_levels[lesson])/len(confidence_levels[lesson])
+        confidence_level_per_lesson[lesson] = sum(confidence_levels[lesson])/len(confidence_levels[lesson])
     return jsonify(confidence_level_per_lesson)
 
 # Get confidence level for a specific lesson
@@ -151,7 +151,7 @@ def get_user(id):
         return jsonify({"error": "User not found"}), 404
 
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor}
+                 "tutor": user.tutor, "lessons": user.lessons[0].title}
     return jsonify(user_info)
 
 # Modify a student
@@ -202,14 +202,15 @@ def store_lesson_data(id, lesson_id):
     if not lesson:
         return jsonify({"message": "Lesson not found!"}), 404
     
-    lesson.question_responses = request.json.get("question_responses", lesson.question_responses)
-    questions_answered = 0
-    for response in lesson.question_responses:
-        if response:
-            question_answered += 1
+    # TODO: fix for question responses after the model is finalized!
+    #lesson.question_responses = request.json.get("question_responses", lesson.question_responses)
+    #questions_answered = 0
+    #for response in lesson.question_responses:
+    #    if response:
+    #        question_answered += 1
 
-    if questions_answered == len(lesson.question_responses):
-        lesson.completed = True
+    #if questions_answered == len(lesson.question_responses):
+    #    lesson.completed = True
     
     lesson.confidence_level = request.json.get("confidence_level", lesson.confidence_level)
     lesson.belonging_level = request.json.get("belonging_level", lesson.belonging_level)
@@ -218,6 +219,16 @@ def store_lesson_data(id, lesson_id):
     
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
+
+# Get lesson data for a certain student
+@app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
+def get_lesson(id, lesson_id):
+    lesson = Student.query.get(id).lessons[lesson_id-1]
+    if not lesson:
+        return jsonify({"error": "User not found"}), 404
+
+    lesson_info = {"title": lesson.title, "confidence_level": lesson.confidence_level}
+    return jsonify(lesson_info)
 
 # Retrieve data from student
 @app.route("/api/student/<int:id>/retrieve_data", methods=["POST"])
