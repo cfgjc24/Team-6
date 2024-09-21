@@ -25,14 +25,14 @@ class Student(db.Model):
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=False, nullable=False)
-    student_id = db.Column(db.Integer, unique=True, nullable=False)
     completed = db.Column(db.Boolean, unique=False, nullable=False)
     questions = db.Column(ARRAY(db.String(120)), unique=False)
     question_responses = db.Column(ARRAY(db.String(120)), unique=False)
-    confidence_level = db.Column(db.Integer, unique=False, nullable=False)
-    belonging_level = db.Column(db.Integer, unique=False, nullable=False)
-    biggest_challenge = db.Column(db.String(120), unique=False, nullable=False)
-    suggestions = db.Column(db.String(120), unique=False, nullable=False)
+    confidence_level = db.Column(db.Integer, unique=False, nullable=True)
+    belonging_level = db.Column(db.Integer, unique=False, nullable=True)
+    biggest_challenge = db.Column(db.String(120), unique=False, nullable=True)
+    suggestions = db.Column(db.String(120), unique=False, nullable=True)
+    slide_link = db.Column(db.String(100), unique=True, nullable=False)
     students = relationship('Student', secondary=student_lesson_association, back_populates='lessons')
 
 # Define tutor model for database
