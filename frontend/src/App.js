@@ -8,6 +8,7 @@ import FAQ from './pages/student/FAQ';
 import LessonOne from './pages/student/lessonOne';
 import Registration from './components/Authentication/Registration';
 import Login from './components/Authentication/Login';
+import AdminView from './pages/student/adminView';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/lessonOne" element={<LessonOne />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/adminView" element={<AdminView />} />
       </Routes>
     </Router>
   );
