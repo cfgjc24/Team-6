@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from models import *
 from collections import defaultdict
 
@@ -50,32 +50,32 @@ def register():
     user_id, password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
     first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
     school = request.form.get('school')
-    tutor = ["Generic Finance Coach"] # TODO - resolve this field
-    all_lessons = [] # TODO - resolve this field
-    lessons_completed = [] # TODO - resolve this field
+    tutor = "Generic Finance Coach" # TODO - resolve this field
     
     user = None
     if user_type == "student":
-        if Student.query.get(user_id) is not None:
+        if Student.query.get(user_id):
             return jsonify({"error": "User already exists"})
-        user = Student(id=user_id, first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=[], all_lessons=all_lessons, lessons_completed=lessons_completed)
+        user = Student(id=int(user_id), first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=tutor)
 
-        lesson_1 = Lesson(title = "Stocks", completed=False, questions=["Are stocks money?", "Is it expensive?"], question_responses=[],
-                        confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link")
-        lesson_2 = Lesson(title = "Money", completed=False, questions=["Is money real?", "Is it green?"], question_responses=[],
-                        confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link2")
-        user.lessons = [lesson_1, lesson_2]
+        # lesson_1 = Lesson(title = "Stocks", completed=False, questions=["Are stocks money?", "Is it expensive?"], question_responses=[],
+        #                 confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link")
+        # lesson_2 = Lesson(title = "Money", completed=False, questions=["Is money real?", "Is it green?"], question_responses=[],
+        #                 confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link2")
+        # user.lessons = [lesson_1, lesson_2]
 
     elif user_type == "tutor":
-        if Tutor.query.get(user_id) is not None:
+        if Tutor.query.get(user_id):
             return jsonify({"error": "User already exists"})
         user = Tutor(id=user_id, first_name=first_name, last_name=last_name, email=email)
     
     try:
-        db.session.add(user)
-        db.session.commit()
+        db_.session.add(user)
+        db_.session.commit()
+        # TODO redirect to user profile or login page
         return redirect("/api/login")
-    except:
+    except Exception as e:
+        print(e)
         return jsonify({"error": "Error registering user"})
 
 
