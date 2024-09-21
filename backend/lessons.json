@@ -1,0 +1,343 @@
+[
+    {
+        "id": "1",
+        "title": "Personal Finance",
+        "completed": false,
+        "confidence_level": 9,
+        "belonging_level": 9,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEqdhQurq8/YZFuXmX70XK7WZWIpLaEEg/edit",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-1/4a6ebec8-5cd2-479a-93cd-2121af5a76ba",
+        "quizlet_link": "https://quizlet.com/614499290/lesson-1-personal-finance-flash-cards/?x=1jqt",
+        "questions": [
+            {
+                "question": "What is budgeting?"
+            },
+            {
+                "question": "What are bank account minimums?"
+            },
+            {
+                "question": "What are overdraft fees?"
+            },
+            {
+                "question": "How can overdraft fees be avoided?"
+            },
+            {
+                "question": "What is a credit score?"
+            },
+            {
+                "question": "Lenders use credit scores to determine..."
+            },
+            {
+                "question": "If you pay your loans/card back on time, in full, and don't borrow more than you can afford - what happens to your credit score?"
+            },
+            {
+                "question": "If you pay your loans/card back late, pay only a part of it, or take out too much debt - what happens to your credit score?"
+            },
+            {
+                "question": "Why is it bad if your credit score goes down?"
+            }
+        ]
+    },
+    {
+        "title": "What is a Stock?",
+        "completed": false,
+        "confidence_level": 10,
+        "belonging_level": 4,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEpi95ye1M/HBcbIaVuniYDgMZO0ukLbQ/edit",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-2/f9dfcb74-d0ca-4fc6-856a-3127371e0250",
+        "quizlet_link": "https://quizlet.com/614503406/lesson-2-what-is-a-stock-flash-cards/?x=1qqt",
+        "questions": [
+            {
+                "question": "What is a stock?"
+            },
+            {
+                "question": "What are some other words for stock?"
+            },
+            {
+                "question": "Why do companies sell stocks?"
+            },
+            {
+                "question": "Why do people buy a company's stocks?"
+            },
+            {
+                "question": "Based on the Lemonade example, who can make money and benefit from stocks?"
+            },
+            {
+                "question": "What is a shareholder?"
+            },
+            {
+                "question": "What might make a company's stock price go up or down?"
+            },
+            {
+                "question": "What is a company whose stock you would be interested in owning, and why?"
+            },
+            {
+                "question": "What is an IPO?"
+            },
+            {
+                "question": "Who can buy / sell stocks?"
+            },
+            {
+                "question": "Why might someone sell a stock that they own?"
+            },
+            {
+                "question": "Why might someone buy a stock from someone else?"
+            },
+            {
+                "question": "What is the stock market?"
+            },
+            {
+                "question": "What is the stock market like now? Is it a physical place? Where are stocks traded?"
+            },
+            {
+                "question": "Why might the founder of a company avoid selling more than 50% of his shares?"
+            }
+            
+        ]
+
+    },
+    {
+        "title": "Volatility and Diversification",
+        "completed": false,
+        "confidence_level": 10,
+        "belonging_level": 10,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEpi6tckaE/vYF9Z9izUbT2aOKtS6_xZg/view?utm_content=DAEpi6tckaE&utm_campaign=designshare&utm_medium=link&utm_source=editor",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-4/0655135b-bb9c-42e1-be6c-e37a6d616676",
+        "quizlet_link": "https://quizlet.com/614501800/lesson-3-diversification-and-volatility-flash-cards/",
+        "questions": [
+            {
+                "question": "RECAP: What is a stock?"
+            },
+            {
+                "question": "What is volatility?"
+            },
+            {
+                "question": "What is diversification?"
+            },
+            {
+                "question": "What is the farming example of diversification?"
+            },
+            {
+                "question": "How does diversification relate to investing? What can you do to diversify?"
+            },
+            {
+                "question": "How are diversification and volatility related?"
+            },
+            {
+                "question": "Does diversifying get rid of all risk? What risk could still remain?"
+            }
+        ]
+    },
+    {
+        "title": "What is a Bond?",
+        "completed": false,
+        "confidence_level": 10,
+        "belonging_level": 10,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEqdo4lTSg/ddYn_uWqnVunQPcSqo9aRg/view?utm_content=DAEqdo4lTSg&utm_campaign=designshare&utm_medium=link&utm_source=editor",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-3/8d5c09ba-284c-422b-8ed3-fac70e2774c9",
+        "quizlet_link": "https://quizlet.com/614505272/lesson-4-what-is-a-bond-flash-cards/?x=1qqt",
+        "questions": [
+            {
+                "question": "RECAP: What is volatility and diversification, and how are they linked?"
+            },
+            {
+                "question": "Who are lenders?"
+            },
+            {
+                "question": "Who are borrowers?"
+            },
+            {
+                "question" : "What is a bond?"
+            },
+            {
+                "question": "What is interest?"
+            },
+            {
+                "question": "Why do companies sell bonds?"
+            },
+            {
+                "question": "Why do people buy bonds as opposed to stocks?"
+            },
+            {
+                "question" : "What is it about interest payments that are unique to bonds?"
+            },
+            {
+                "question": "Do interest rates change based on how trustworthy you are as a borrower?"
+            }
+        ]
+    },
+    {
+        "title": "Mutual Funds/ETFs",
+        "completed": false,
+        "confidence_level": 10,
+        "belonging_level": 9,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEp0bQDqJE/2HzXkanZm9i3-s0xX7BrxQ/edit",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-5/30cfa912-4b4c-4fb5-b654-5114dfc81aad",
+        "quizlet_link": "https://quizlet.com/614506210/lesson-5-mutual-fundsetfs-flash-cards/?x=1qqt",
+        "questions": [
+            {
+                "question":"RECAP: What is a bond?"
+            },
+            {
+                "question":"What is a portfolio?"
+            },
+            {
+                "question":"What is a mutual fund?"
+            },
+            {
+                "question":"Why might it be difficult to diversify by yourself?"
+            },
+            {
+                "question":"Describe how a mutual fund works."
+            },
+            {
+                "question":"What kind of fees do mutual funds have?"
+            },
+            {
+                "question":"What is an ETF?"
+            },
+            {
+                "question":"Why do ETFs typically have less fees than mutual funds do?"
+            },
+            {
+                "question":"What is an index fund?"
+            },
+            {
+                "question":"What are some major indexes? What do they represent?"
+            },
+            {
+                "question":"What is a sector? What are some examples of sectors?"
+            },
+            {
+                "question":"Why does investing in one sector not ensure your portfolio is totally diversified?"
+            },
+            {
+                "question":"How are mutual funds, ETFs, and index funds all similar?"
+            },
+            {
+                "question":"What does the growth of the S&P 500 over time show us about investing?"
+            },
+            {
+                "question":"Overall, what are the positives to investing in a mutual fund or an ETF?"
+            }
+
+        ]
+    },
+    {
+        "title": "Compound Interest and Dollar-Cost Averaging",
+        "completed": false,
+        "confidence_level": 7,
+        "belonging_level": 10,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEpi0ibGoU/du-ip1g8hlWc3xDSxL0UBQ/edit",
+        "kahoot_link": "https://create.kahoot.it/share/check-lesson-6/13c58b08-e15e-4b69-af4e-5ffc618f4bb1",
+        "quizlet_link": "https://quizlet.com/614507027/lesson-6-compound-interest-and-dca-flash-cards/?x=1qqt",
+        "questions": [
+            {
+                "question":"RECAP: What are mutual funds and ETFs?"
+            },
+            {
+                "question":"What is simple interest?"
+            },
+            {
+                "question":"What is compound interest?"
+            },
+            {
+                "question":"What does principal mean?"
+            },
+            {
+                "question":"What happens to your interest earned each year using compound interest?"
+            },
+            {
+                "question":"What does compound interest tell you about how you should invest?"
+            },
+            {
+                "question":"What is dollar-cost averaging?"
+            },
+            {
+                "question":"How does dollar-cost averaging work?"
+            },
+            {
+                "question":"What are some benefits of dollar-cost averaging?"
+            },
+            {
+                "question":"What are some downsides to dollar-cost averaging?"
+            },
+            {
+                "question": "How could you practice dollar-cost averaging when you receive paychecks when you begin working?"
+            }
+        ]
+    },
+    {
+        "title": "Personal Finance Part II",
+        "completed": false,
+        "confidence_level": 9,
+        "belonging_level": 9,
+        "biggest_challenge": null,
+        "suggestions": null,
+        "slide_link": "https://www.canva.com/design/DAEqdsGCfIs/rrJwRs1BnTMxy5sWjWqXXg/edit",
+        "kahoot_link": "https://play.kahoot.it/v2/?quizId=94150caa-de03-4f7c-91ae-6e97daea45bd",
+        "quizlet_link": "https://quizlet.com/614507924/lesson-7-personal-finance-20-flash-cards/?x=1qqt",
+        "questions": [
+            {
+                "question":"What are taxes and what are their uses?"
+            },
+            {
+                "question":"How often do you have to file taxes?"
+            },
+            {
+                "question":"What is tax withholding?"
+            },
+            {
+                "question":"What is a tax return?"
+            },
+            {
+                "question":"How do you go about filing your taxes?"
+            },
+            {
+                "question":"What is a 401k?"
+            },
+            {
+                "question":"What is a Roth IRA?"
+            },
+            {
+                "question":"What are 2 unique elements of Roth IRAs?"
+            },
+            {
+                "question":"What is a mortgage?"
+            },
+            {
+                "question":"What is a mortgage down payment?"
+            },
+            {
+                "question":"Why is it important to complete the FAFSA form?"
+            },
+            {
+                "question":"What happens after you fill out the FAFSA form?”"
+            },
+            {
+                "question":"What is and how long is a 'grace period' when it comes to repaying student loans?"
+            },
+            {
+                "question":"Why should you first turn to federal loan options instead of private options?"
+            },
+            {
+                "question":"What is the difference between the two types of federal loans?"
+            },
+            {
+                "question":"Why is it important to understand the differences between scholarships, grants, and loans?"
+            }
+        ]
+    }
+]

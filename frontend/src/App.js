@@ -14,8 +14,7 @@ import LessonFour from './pages/student/lessons/lessonFour';
 import LessonFive from './pages/student/lessons/lessonFive';
 import LessonSix from './pages/student/lessons/lessonSix';
 import LessonSeven from './pages/student/lessons/lessonSeven';
-
-
+import AdminView from './pages/student/adminView';
 
 function App() {
   return (
@@ -35,6 +34,7 @@ function App() {
         <Route path="/lessons/lessonSeven" element={<LessonSeven />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/adminView" element={<AdminView />} />
       </Routes>
     </Router>
   );
