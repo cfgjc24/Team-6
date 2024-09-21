@@ -10,8 +10,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
-
 # Welcome user to First Generation Investors
 @app.route("/")
 def main():
@@ -31,6 +29,16 @@ def login():
 @app.route("/api/register", methods=["POST"])
 def register():
     return jsonify({"Successfully registered!"})
+
+# Get all students
+@app.route("/api/users/students", methods=["GET"])
+def get_students():
+    students = Student.query.all()
+    student_list = []
+    for student in students:
+        student_list.append({"first_name": student.first_name, "last_name": student.last_name, "email": student.email, "school": student.school, 
+                             "tutor": student.tutor, "all_lessons": student.all_lessons, "lessons_completed": student.lessons_completed})
+    return jsonify(student_list)
 
 # Get user profile
 @app.route("/api/users/<id>", methods=["GET"])
@@ -98,8 +106,6 @@ def retrieve_data(student_id):
         return "Error"
     
     return "No Error"
-
-
 
 if __name__ == "__main__":
     with app.app_context():
