@@ -1,7 +1,13 @@
 from app import db
 from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy import Table, Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from sqlalchemy.schema import ForeignKey
+
+# Association Table linking Student and Lesson
+student_lesson_association = db.Table('student_lesson',
+    db.Column('student_id', db.Integer, db.ForeignKey('student.id'), primary_key=True),
+    db.Column('lesson_id', db.Integer, db.ForeignKey('lesson.id'), primary_key=True)
+)
 
 # Define student model for database
 class Student(db.Model):
@@ -14,6 +20,7 @@ class Student(db.Model):
    tutor = db.Column(ARRAY(db.String(50)), nullable=False)
    all_lessons = db.Column(ARRAY(db.String(150)), nullable=False)
    lessons_completed = db.Column(ARRAY(db.String(50)), nullable=False)
+    
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), unique=False, nullable=False)
