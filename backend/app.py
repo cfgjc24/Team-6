@@ -27,8 +27,9 @@ def api():
 # Login API endpoint
 @app.route("/api/login", methods=["POST"])
 def login():
-    # TODO - resolve these three fields in the frontend
-    user_password, user_type, email = request.form.get('password'), request.form.get('user_type'), request.form.get('email')
+    user_password = request.form.get('password')
+    user_type = request.form.get('user_type')
+    email = request.form.get('email')
     user = None
     if user_type == "student":
         user = Student.query.filter_by(email=email).first()
@@ -47,11 +48,12 @@ def login():
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    password, user_type = request.form.get('password'), request.form.get('user_type')
+    password = request.form.get('password')
+    user_type = request.form.get('user_type')
     first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
     school = request.form.get('school')
-    tutor = "Generic Finance Coach" # TODO - resolve this field
-    
+    tutor = "Generic Finance Coach"
+
     user = None
     if user_type == "student":
         if Student.query.filter_by(email=email).first():
@@ -62,15 +64,13 @@ def register():
         if Tutor.query.filter_by(email=email).first():
             return jsonify({"error": "User already exists"})
         user = Tutor(first_name=first_name, last_name=last_name, email=email)
-    
+
     try:
         db_.session.add(user)
         db_.session.commit()
-        # TODO redirect to user profile or login page
-        return redirect("/api/login")
+        return redirect(f"/api/student/{user.id}")
     except Exception as e:
-        print(e)
-        return jsonify({"error": "Error registering user"})
+        return jsonify({"error": "Error registering user"}), 400
 
 
 
@@ -153,7 +153,7 @@ def get_user(id):
         return jsonify({"error": "User not found"}), 404
 
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "lessons": user.lessons[0].title}
+                 "tutor": user.tutor}
     return jsonify(user_info)
 
 # Modify a student

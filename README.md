@@ -23,10 +23,15 @@ cd frontend
 npm install
 npm start
 ```
+<<<<<<<<< Temporary merge branch 1
+=======
 ## Our tech stack:
 - Flask
 - Python
 - React
+=========
+
+### Team Members
 
 *(insert contributions here)*
 
