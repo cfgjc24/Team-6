@@ -47,7 +47,7 @@ lesson_completed_lessons = db_.Table('lesson_lessons_completed',
 )
 
 class Lesson(db_.Model):
-    id = db_.Column(db_.Integer, primary_key=True, autoincrement=True)
+    id = db_.Column(db_.Integer, primary_key=True)
     title = db_.Column(db_.String(120), unique=False, nullable=False)
     questions = relationship('Question', secondary=lesson_question, back_populates='lessons')
     slide_link = db_.Column(db_.String(100), unique=False, nullable=False)
