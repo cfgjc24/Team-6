@@ -28,12 +28,12 @@ def api():
 @app.route("/api/login", methods=["POST"])
 def login():
     # TODO - resolve these three fields in the frontend
-    user_id, user_password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    user_password, user_type, email = request.form.get('password'), request.form.get('user_type'), request.form.get('email')
     user = None
     if user_type == "student":
-        user = Student.query.get(user_id)
+        user = Student.query.filter_by(email=email).first()
     elif user_type == "tutor":
-        user = Tutor.query.get(user_id)
+        user = Tutor.query.filter_by(email=email).first()
     elif user_type == "admin":
         # user = Admin.query.get(user_id)
         # TODO - implement admin model
@@ -42,33 +42,26 @@ def login():
         return jsonify({"error": "Invalid user type"})
     if user is None or user.password != user_password:
         return jsonify({"error": "Invalid username or password"})
-    return redirect(f'/api/users/{user_type}/{user_id}')
+    return redirect(f'/api/{user_type}/{user.id}')
 
 # Registration API endpoint
 @app.route("/api/register", methods=["POST"])
 def register():
-    # TODO - resolve these three fields in the frontend
-    user_id, password, user_type = request.form.get('username'), request.form.get('password'), request.form.get('user_type')
+    password, user_type = request.form.get('password'), request.form.get('user_type')
     first_name, last_name, email = request.form.get('first_name'), request.form.get('last_name'), request.form.get('email')
     school = request.form.get('school')
     tutor = "Generic Finance Coach" # TODO - resolve this field
     
     user = None
     if user_type == "student":
-        if Student.query.get(user_id):
+        if Student.query.filter_by(email=email).first():
             return jsonify({"error": "User already exists"})
-        user = Student(id=int(user_id), first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=tutor)
-
-        # lesson_1 = Lesson(title = "Stocks", completed=False, questions=["Are stocks money?", "Is it expensive?"], question_responses=[],
-        #                 confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link")
-        # lesson_2 = Lesson(title = "Money", completed=False, questions=["Is money real?", "Is it green?"], question_responses=[],
-        #                 confidence_level=None, belonging_level=None, biggest_challenge=None, suggestions=None, slide_link="Link2")
-        # user.lessons = [lesson_1, lesson_2]
+        user = Student(first_name=first_name, last_name=last_name, email=email, school=school, password=password, tutor=tutor)
 
     elif user_type == "tutor":
-        if Tutor.query.get(user_id):
+        if Tutor.query.filter_by(email=email).first():
             return jsonify({"error": "User already exists"})
-        user = Tutor(id=user_id, first_name=first_name, last_name=last_name, email=email)
+        user = Tutor(first_name=first_name, last_name=last_name, email=email)
     
     try:
         db_.session.add(user)

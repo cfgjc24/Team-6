@@ -17,7 +17,7 @@ student_lesson_association = db_.Table('student_lesson',
 
 # Define student model for database
 class Student(db_.Model):
-   id = db_.Column(db_.Integer, primary_key=True)
+   id = db_.Column(db_.Integer, primary_key=True, autoincrement=True)
    first_name = db_.Column(db_.String(50), nullable=False)
    last_name = db_.Column(db_.String(50), nullable=False)
    email = db_.Column(db_.String(50), unique=True, nullable=False)
@@ -47,7 +47,7 @@ lesson_completed_lessons = db_.Table('lesson_lessons_completed',
 )
 
 class Lesson(db_.Model):
-    id = db_.Column(db_.Integer, primary_key=True)
+    id = db_.Column(db_.Integer, primary_key=True, autoincrement=True)
     title = db_.Column(db_.String(120), unique=False, nullable=False)
     completed = db_.Column(db_.Boolean, unique=False, nullable=False)
     confidence_level = db_.Column(db_.Integer, unique=False, nullable=True)
