@@ -1,64 +1,152 @@
 [
-    {
-        "id": "1",
-        "first_name": "Jane",
-        "last_name": "Smith",
-        "email": "janesmith@gmail.com",
-        "school": "University of Washingston",
-        "password": "12345678",
-        "tutor": "John Doe",
-        "lessons": []
-    },
-        {
-            "id": "2",
-            "first_name": "Michael",
-            "last_name": "Johnson",
-            "email": "michaelj@upenn.edu",
-            "school": "University of Pennsylvania",
-            "password": "abcdef12",
-            "tutor": "Sarah Lee",
-            "lessons": []
-        },
-        {
-            "id": "3",
-            "first_name": "Emily",
-            "last_name": "Williams",
-            "email": "emilyw@nyu.edu",
-            "school": "New York University",
-            "password": "pass1234",
-            "tutor": "Adam Brown",
-            "lessons": []
-        },
-        {
-            "id": "4",
-            "first_name": "Chris",
-            "last_name": "Davis",
-            "email": "chrisd@mit.edu",
-            "school": "Massachusetts Institute of Technology",
-            "password": "password123",
-            "tutor": "Cathy Johnson",
-            "lessons": []
-        },
-        {
-            "id": "5",
-            "first_name": "Sophia",
-            "last_name": "Martinez",
-            "email": "sophiam@harvard.edu",
-            "school": "Harvard University",
-            "password": "harvard789",
-            "tutor": "Emily Clark",
-            "lessons": []
-        },
-        {
-            "id": "6",
-            "first_name": "Daniel",
-            "last_name": "Garcia",
-            "email": "danielg@georgiatech.edu",
-            "school": "Georgia Tech",
-            "password": "georgia456",
-            "tutor": "Olivia Brown",
-            "lessons": []
-        }
-    ]
-
-
+  {
+    "id": "1",
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "email": "janesmith@gmail.com",
+    "school": "University of Washington",
+    "password": "12345678",
+    "tutor": "John Doe",
+    "lessons": []
+  },
+  {
+    "id": "2",
+    "first_name": "Michael",
+    "last_name": "Johnson",
+    "email": "michaelj@upenn.edu",
+    "school": "University of Pennsylvania",
+    "password": "abcdef12",
+    "tutor": "Sarah Lee",
+    "lessons": []
+  },
+  {
+    "id": "3",
+    "first_name": "Emily",
+    "last_name": "Williams",
+    "email": "emilyw@nyu.edu",
+    "school": "New York University",
+    "password": "pass1234",
+    "tutor": "Adam Brown",
+    "lessons": []
+  },
+  {
+    "id": "4",
+    "first_name": "Chris",
+    "last_name": "Davis",
+    "email": "chrisd@mit.edu",
+    "school": "Massachusetts Institute of Technology",
+    "password": "password123",
+    "tutor": "Cathy Johnson",
+    "lessons": []
+  },
+  {
+    "id": "5",
+    "first_name": "Sophia",
+    "last_name": "Martinez",
+    "email": "sophiam@harvard.edu",
+    "school": "Harvard University",
+    "password": "harvard789",
+    "tutor": "Emily Clark",
+    "lessons": []
+  },
+  {
+    "id": "6",
+    "first_name": "Daniel",
+    "last_name": "Garcia",
+    "email": "danielg@georgiatech.edu",
+    "school": "Georgia Tech",
+    "password": "georgia456",
+    "tutor": "Olivia Brown",
+    "lessons": []
+  },
+  {
+    "id": "7",
+    "first_name": "Olivia",
+    "last_name": "Miller",
+    "email": "student7@school.edu",
+    "school": "Cornell University",
+    "password": "pass861",
+    "tutor": "Ashley Wilson",
+    "lessons": []
+  },
+  {
+    "id": "8",
+    "first_name": "Noah",
+    "last_name": "Garcia",
+    "email": "student8@school.edu",
+    "school": "University of Texas",
+    "password": "pass984",
+    "tutor": "Victoria Green",
+    "lessons": []
+  },
+  {
+    "id": "9",
+    "first_name": "James",
+    "last_name": "White",
+    "email": "student9@school.edu",
+    "school": "Stanford University",
+    "password": "pass1107",
+    "tutor": "Matthew Thompson",
+    "lessons": []
+  },
+  {
+    "id": "10",
+    "first_name": "Benjamin",
+    "last_name": "Taylor",
+    "email": "student10@school.edu",
+    "school": "Princeton University",
+    "password": "pass1230",
+    "tutor": "Elizabeth Harris",
+    "lessons": []
+  },
+  {
+    "id": "11",
+    "first_name": "Ava",
+    "last_name": "Moore",
+    "email": "student11@school.edu",
+    "school": "Stanford University",
+    "password": "pass1353",
+    "tutor": "Joshua Lewis",
+    "lessons": []
+  },
+  {
+    "id": "12",
+    "first_name": "Henry",
+    "last_name": "Anderson",
+    "email": "student12@school.edu",
+    "school": "University of Texas",
+    "password": "pass1476",
+    "tutor": "Ashley Wilson",
+    "lessons": []
+  },
+  {
+    "id": "13",
+    "first_name": "Lucas",
+    "last_name": "Thomas",
+    "email": "student13@school.edu",
+    "school": "Princeton University",
+    "password": "pass1599",
+    "tutor": "Matthew Thompson",
+    "lessons": []
+  },
+  {
+    "id": "14",
+    "first_name": "Charlotte",
+    "last_name": "Martin",
+    "email": "student14@school.edu",
+    "school": "UC Berkeley",
+    "password": "pass1722",
+    "tutor": "Victoria Green",
+    "lessons": []
+  },
+  {
+    "id": "15",
+    "first_name": "Emma",
+    "last_name": "Jackson",
+    "email": "student15@school.edu",
+    "school": "Cornell University",
+    "password": "pass1845",
+    "tutor": "Elizabeth Harris",
+    "lessons": []
+  }
+]
