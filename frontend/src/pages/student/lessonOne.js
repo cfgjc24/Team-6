@@ -74,7 +74,7 @@ const LessonOne = () => {
           href={lessonData.link}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Link
         </a>
@@ -90,7 +90,7 @@ const LessonOne = () => {
           href={lessonData.kahoot}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Kahoot
         </a>
@@ -101,7 +101,7 @@ const LessonOne = () => {
           href={lessonData.quizlet}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Quizlet
         </a>
