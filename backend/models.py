@@ -68,6 +68,7 @@ class Question(db_.Model):
 
 class QuestionResponse(db_.Model):
     id = db_.Column(db_.Integer, primary_key=True)
+    response = db_.Column(db_.String(120), unique=False, nullable=False)
     lessons = relationship('Lesson', secondary=lesson_question_response, back_populates='question_responses')
 
 class AllLessons(db_.Model):

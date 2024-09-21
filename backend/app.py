@@ -207,8 +207,17 @@ def store_lesson_data(id, lesson_id):
     if not lesson:
         return jsonify({"message": "Lesson not found!"}), 404
     
-    # TODO: fix for question responses after the model is finalized!
     #lesson.question_responses = request.json.get("question_responses", lesson.question_responses)
+    question_responses = []
+    for response in request.json["question_responses"]:
+        if response:
+            question_responses.append(QuestionResponse(response=response))
+    lesson.question_responses = question_responses
+
+    completed = False
+    if len(question_responses) == len(lesson.questions):
+        lesson.completed = True
+
     #questions_answered = 0
     #for response in lesson.question_responses:
     #    if response:
@@ -217,17 +226,18 @@ def store_lesson_data(id, lesson_id):
     #if questions_answered == len(lesson.question_responses):
     #    lesson.completed = True
     
-    lesson.confidence_level = request.json.get("confidence_level", lesson.confidence_level)
-    lesson.belonging_level = request.json.get("belonging_level", lesson.belonging_level)
-    lesson.biggest_challenge = request.json.get("biggest_challenge", lesson.biggest_challenge)
-    lesson.suggestions = request.json.get("suggestions", lesson.suggestions)
+    lesson.confidence_level = request.json["confidence_level"]
+    lesson.belonging_level = request.json["belonging_level"]
+    lesson.biggest_challenge = request.json["biggest_challenge"]
+    lesson.suggestions = request.json["suggestions"]
     
     db_.session.commit()
     return jsonify({"message": "Lesson Stored!"})
 
 # Get lesson data for a certain student, lesson_id here isn't the actual lesson_id, but rather, the index of the lesson in the student.lessons
-@app.route("/api/student/<int:id>/<int:lesson_id>", methods=["GET"])
-def get_lesson(id, lesson_id):
+@app.route("/api/course/<int:lesson_id>", methods=["GET"])
+def get_lesson(lesson_id):
+    id = 1
     lessons = Student.query.get(id).lessons
     lesson = lessons[lesson_id-1]
     if not lesson:
@@ -245,23 +255,29 @@ def get_lesson(id, lesson_id):
     return lesson_info
 
 # Retrieve data from student
-@app.route("/api/student/<int:id>/retrieve_data", methods=["POST"])
+@app.route("/api/student/<int:id>/retrieve_data", methods=["PUT"])
 def retrieve_data(id):
+    student = Student.query.get(id)
     question_responses = []
     for response in request.json.get("questions"):
         if response:
-            question_responses.append(response)
+            question_responses.append(QuestionResponse(response=response))
+
+    lesson = None
+    for this_lesson in student.lessons:
+        if this_lesson.id == lesson_id:
+            lesson = this_lesson
 
     completed = False
     if len(question_responses) == len(request.json.get("questions")):
-        completed = True
+        lesson.completed = True
     
-    confidence_level = request.json.get("confidence_level")
-    belonging_level = request.json.get("confidence_level")
-    biggest_challenge = request.json.get("confidence_level")
-    suggestions = request.json.get("confidence_level")
+    lesson.confidence_level = request.json.get("confidence_level")
+    lesson.belonging_level = request.json.get("belonging_level")
+    lesson.biggest_challenge = request.json.get("biggest_challenge")
+    lesson.suggestions = request.json.get("suggestions")
 
-    this_lesson = Lesson(student_id=id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+    this_lesson = Lesson(completed=completed, question_responses=question_responses, confidence_level=confidence_level,
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
