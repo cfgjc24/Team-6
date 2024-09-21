@@ -47,16 +47,6 @@ const lessonOne = () => {
 
   };
 
-  const [open, setOpen] = React.useState(false);
- 
-    const handleClose = () => {
-        setOpen(false);
-    };
- 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
   return (
 
     <div className="lessonOne">
@@ -74,7 +64,7 @@ const lessonOne = () => {
           href={lessonData.link}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Link
         </a>
@@ -90,7 +80,7 @@ const lessonOne = () => {
           href={lessonData.kahoot}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Kahoot
         </a>
@@ -101,7 +91,7 @@ const lessonOne = () => {
           href={lessonData.quizlet}
           target="_blank"
           rel="noopener noreferer"
-          style={{ color: '#5FA9E6' }}
+          className="lesson-link"
         >
           Quizlet
         </a>
@@ -142,5 +132,5 @@ const lessonOne = () => {
   );
 
 };
-//test
+
 export default lessonOne;
