@@ -83,7 +83,8 @@ def get_confidence_levels():
     all_students = Student.query.all()  
     for student in all_students:
         for lesson in student.lessons:
-            confidence_levels[lesson.id].append(lesson.confidence_level)
+            if lesson.confidence_level:
+                confidence_levels[lesson.id].append(lesson.confidence_level)
     for lesson in confidence_levels:
         confidence_level_per_lesson[lesson] = sum(confidence_levels[lesson])/len(confidence_levels[lesson])
     return jsonify(confidence_level_per_lesson)
@@ -104,7 +105,8 @@ def get_belonging_levels():
     all_students = Student.query.all()  
     for student in all_students:
         for lesson in student.lessons:
-            belonging_levels[lesson.id].append(lesson.belonging_level)
+            if lesson.belonging_level:
+                belonging_levels[lesson.id].append(lesson.belonging_level)
     for lesson in belonging_levels:
         belonging_level_per_lesson[lesson.id] = sum(belonging_levels[lesson])/len(belonging_levels[lesson])
     return jsonify(belonging_level_per_lesson)
