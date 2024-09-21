@@ -20,7 +20,7 @@ const lessonData = {
 
 };
 
-const lessonOne = () => {
+const LessonOne = () => {
 
   const [answers, setAnswers] = useState(Array(lessonData.questions.length).fill('')); // array of answers
   const [submitted, setSubmitted] = useState(Array(lessonData.questions.length).fill(false));
@@ -48,14 +48,14 @@ const lessonOne = () => {
   };
 
   const [open, setOpen] = React.useState(false);
- 
-    const handleClose = () => {
-        setOpen(false);
-    };
- 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   return (
 
@@ -130,7 +130,7 @@ const lessonOne = () => {
       </main>
 
       <hr></hr>
-      
+
       <h2>LESSON SURVEY</h2>
 
       <p>Your cannot complete the lesson until you submit the survey!</p>
@@ -143,4 +143,4 @@ const lessonOne = () => {
 
 };
 //test
-export default lessonOne;
+export default LessonOne;
