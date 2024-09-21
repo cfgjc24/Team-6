@@ -56,6 +56,7 @@ function Registration() {
       if (response.ok) {
         setSuccess(true);
         setError(null);
+        navigate('/home');
       } else {
         setError(result.error || 'Registration failed');
       }
