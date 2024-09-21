@@ -12,6 +12,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+
+
 # Welcome user to First Generation Investors
 @app.route("/")
 def main():
@@ -91,7 +93,7 @@ def get_confidence_levels():
     return jsonify(confidence_level_per_lesson)
 
 # Get confidence level for a specific lesson
-@app.route("/api/admin/confidence/<lesson_id>", methods=["GET"])
+@app.route("/api/admin/confidence/<int:lesson_id>", methods=["GET"])
 def get_lesson_confidence_level(lesson_id):
     all_students = Student.query.all()  
     for student in all_students:
@@ -113,7 +115,7 @@ def get_belonging_levels():
 
 
 # Get all students
-@app.route("/api/users/students", methods=["GET"])
+@app.route("/api/admin/students", methods=["GET"])
 def get_students():
     students = Student.query.all()
     student_list = []
@@ -123,7 +125,7 @@ def get_students():
     return jsonify(student_list)
 
 # Get user profile
-@app.route("/api/users/<id>", methods=["GET"])
+@app.route("/api/student/<int:id>", methods=["GET"])
 def get_user(id):
     user = user.error_or_404(id)
     user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
@@ -131,7 +133,7 @@ def get_user(id):
     return jsonify(user_info)
 
 # Modify a student
-@app.route('/api/users/students/<id>', methods=['PUT'])
+@app.route('/api/student/<int:id>', methods=['PUT'])
 def update_student(id):
     data = request.get_json()
     student = Student.query.filter_by(name=name).first_or_404()
@@ -152,7 +154,7 @@ def update_student(id):
     return jsonify({'Student modified.'}, new_details), 200
 
 # Delete a student
-@app.route('/api/users/students/<id>', methods=['DELETE'])
+@app.route('/api/student/<int:id>', methods=['DELETE'])
 def delete_student(id):
     student = Student.query.filter_by(id=id).first_or_404()
     db.session.delete(id)
@@ -195,7 +197,7 @@ def store_lesson_data(id, lesson_id):
     return jsonify({"message": "Lesson Stored!"})
 
 # Retrieve data from student
-@app.route("/api/users/student/<id>/retrieve_data", methods=["POST"])
+@app.route("/api/student/<int:id>/retrieve_data", methods=["POST"])
 def retrieve_data(id):
     question_responses = []
     for response in request.json.get("questions"):
@@ -242,6 +244,8 @@ def dump_lesson_data():
             for lesson in student.lessons:
                 f.write(f"{lesson.id},{lesson.title},{student.first_name},{student.last_name},{student.id},{lesson.question_responses},{lesson.confidence_level},{lesson.belonging_level},{lesson.biggest_challenge},{lesson.suggestions}\n")
     return send_file(dumpfile.name)
+
+
 
 if __name__ == "__main__":
     with app.app_context():
