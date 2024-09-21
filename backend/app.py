@@ -163,7 +163,10 @@ def get_user(id):
 @app.route('/api/student/<int:id>', methods=['PUT'])
 def update_student(id):
     data = request.get_json()
-    student = Student.query.filter_by(name=name).first_or_404()
+    student = Student.query.get(id)
+    if not student:
+        return jsonify({"message": "Student not found!"}), 404
+    
     student.name = data.get('name', student.name)
     student.description = data.get('description', student.description)
     student.email = data.get('email', student.email)
