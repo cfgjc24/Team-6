@@ -10,8 +10,6 @@ function Registration() {
     confirmPassword: '',
     school: '',
     tutor: '',
-    allLessons: '',
-    lessonsCompleted: '',
   });
 
   const [error, setError] = useState(null);
@@ -148,30 +146,6 @@ function Registration() {
             name="tutor"
             placeholder="Enter tutor names"
             value={formData.tutor}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="allLessons">All Lessons</label>
-          <input
-            type="text"
-            id="allLessons"
-            name="allLessons"
-            placeholder="Enter all lessons"
-            value={formData.allLessons}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="lessonsCompleted">Lessons Completed</label>
-          <input
-            type="text"
-            id="lessonsCompleted"
-            name="lessonsCompleted"
-            placeholder="Enter completed lessons"
-            value={formData.lessonsCompleted}
             onChange={handleChange}
             required
           />
