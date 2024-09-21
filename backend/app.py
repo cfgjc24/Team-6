@@ -10,8 +10,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_FILE}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-
-
 # Welcome user to First Generation Investors
 @app.route("/")
 def main():
@@ -21,14 +19,6 @@ def main():
 @app.route("/api/", methods=["GET"])
 def api():
     return jsonify({"message": "Welcome to the API!"})
-
-# Get user profile
-@app.route("/api/users/<id>", methods=["GET"])
-def get_user(id):
-    user = user.error_or_404(id)
-    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
-                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
-    return jsonify(user_info)
 
 # Login API endpoint
 @app.route("/api/login", methods=["PUT"])
@@ -40,8 +30,58 @@ def login():
 def register():
     return jsonify({"Successfully registered!"})
 
-@app.route("/student/<student_id>/retrieve_data", methods=["POST"])
-def retrieve_data(student_id):
+# Get all students
+@app.route("/api/users/students", methods=["GET"])
+def get_students():
+    students = Student.query.all()
+    student_list = []
+    for student in students:
+        student_list.append({"first_name": student.first_name, "last_name": student.last_name, "email": student.email, "school": student.school, 
+                             "tutor": student.tutor, "all_lessons": student.all_lessons, "lessons_completed": student.lessons_completed})
+    return jsonify(student_list)
+
+# Get user profile
+@app.route("/api/users/<id>", methods=["GET"])
+def get_user(id):
+    user = user.error_or_404(id)
+    user_info = {"first_name": user.first_name, "last_name": user.last_name, "email": user.email, "school": user.school, 
+                 "tutor": user.tutor, "all_lessons": user.all_lessons, "lessons_completed": user.lessons_completed}
+    return jsonify(user_info)
+
+# Modify a student
+@app.route('/api/users/students/<id>', methods=['PUT'])
+def update_student(id):
+    data = request.get_json()
+    student = Student.query.filter_by(name=name).first_or_404()
+    student.name = data.get('name', student.name)
+    student.description = data.get('description', student.description)
+    student.email = data.get('email', student.email)
+    student.school = data.get('school', student.school)
+    student.tutor = data.get('tutor', student.tutor)
+    student.all_lessons = data.get('all_lessons', student.all_lessons)
+    student.lessons_completed = data.get('lessons_completed', student.lessons_completed)
+    new_details = ({"name": student.name,
+        "description": student.description,
+        "email": student.email,
+        "school": student.school,
+        "tutor": student.tutor,
+        "all_lessons": student.all_lessons,
+        "lessons_completed": student.lessons_completed})
+    return jsonify({'Student modified.'}, new_details), 200
+
+# Delete a student
+@app.route('/api/users/students/<id>', methods=['DELETE'])
+def delete_student(id):
+    student = Student.query.filter_by(id=id).first_or_404()
+    db.session.delete(id)
+    db.session.commit()
+    deleted_data = ({"first_name": student.first_name, "last_name": student.last_name, "email": 
+                     student.email, "school": student.school,})
+    return jsonify({'message': 'Student deleted. Sorry to see you go.'}, deleted_data)
+
+# Retrieve data from student
+@app.route("/api/users/student/<id>/retrieve_data", methods=["POST"])
+def retrieve_data(id):
     question_responses = []
     for response in request.json.get("questions"):
         if response:
@@ -56,7 +96,7 @@ def retrieve_data(student_id):
     biggest_challenge = request.json.get("confidence_level")
     suggestions = request.json.get("confidence_level")
 
-    this_lesson = Lesson(student_id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
+    this_lesson = Lesson(student_id=id, completed=completed, question_responses=question_responses, confidence_level=confidence_level,
                          belonging_level=belonging_level, biggest_challenge=biggest_challenge, suggestions=suggestions)
 
     try:
@@ -66,8 +106,6 @@ def retrieve_data(student_id):
         return "Error"
     
     return "No Error"
-
-
 
 if __name__ == "__main__":
     with app.app_context():
