@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import tempfile
 
 from models import *
+from collections import defaultdict
 
 DB_FILE = "fgi.db"
 
@@ -68,6 +69,40 @@ def register():
         return redirect("/api/login")
     except:
         return jsonify({"error": "Error registering user"})
+
+# Get average confidence levels for each lesson
+@app.route("/api/admin/confidence", methods=["GET"])
+def get_confidence_levels():
+    confidence_levels = defaultdict(list)
+    confidence_level_per_lesson = defaultdict(int)
+    all_students = Student.query.all()  
+    for student in all_students:
+        for lesson in student.lessons:
+            confidence_levels[lesson.id].append(lesson.confidence_level)
+    for lesson in confidence_levels:
+        confidence_level_per_lesson[lesson.id] = sum(confidence_levels[lesson])/len(confidence_levels[lesson])
+    return jsonify(confidence_level_per_lesson)
+
+# Get confidence level for a specific lesson
+@app.route("/api/admin/confidence/<lesson_id>", methods=["GET"])
+def get_lesson_confidence_level(lesson_id):
+    all_students = Student.query.all()  
+    for student in all_students:
+        confidence_levels = [lesson.confidence_level for lesson in student.lessons if lesson.id == lesson_id]
+    return jsonify(confidence_levels)
+
+# Get average belonging levels for each lesson
+@app.route("/api/admin/belonging", methods=["GET"])
+def get_confidence_levels():
+    belonging_levels = defaultdict(list)
+    belonging_level_per_lesson = defaultdict(int)
+    all_students = Student.query.all()  
+    for student in all_students:
+        for lesson in student.lessons:
+            belonging_levels[lesson.id].append(lesson.belonging_level)
+    for lesson in belonging_levels:
+        belonging_level_per_lesson[lesson.id] = sum(belonging_levels[lesson])/len(belonging_levels[lesson])
+    return jsonify(belonging_level_per_lesson)
 
 
 # Get all students
